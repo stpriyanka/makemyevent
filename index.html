@@ -1,0 +1,1873 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+
+
+<head>
+  <meta charset='utf-8'/>
+  <meta name='viewport' content='width=device-width, initial-scale=1'/>
+  <title>Make My Event — Wedding Profile</title>
+  <link rel='preconnect' href='https://fonts.googleapis.com'>
+  <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
+  <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
+  <link rel='stylesheet' href='styles.css'/>
+</head>
+<body>
+
+   <!-- <a href="#team">Team</a> -->
+      <!-- <a href="#testimonials">Testimonials</a> -->
+
+  <nav class="nav">
+  <div class="container inner">
+    <a class="brand" href="#top">
+      <img src="assets/images/MME logo Png-02.png" alt="Make My Event Logo">
+    </a>
+    <div class="links">
+      <a href="#about">About</a>
+      <a href="#segments">Segments</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#team">Team</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<style>
+/* Layout for nav (if you don't already have this) */
+.nav .inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  /* responsive container padding + iPhone notch safe-area */
+  padding-inline: max(16px, env(safe-area-inset-left)) max(16px, env(safe-area-inset-right));
+}
+
+/* Make the logo size responsive */
+.brand img{
+  height: clamp(56px, 10vw, 120px);
+  width:auto;
+  display:block;
+}
+
+/* RESPONSIVE LEFT NUDGE (won’t go off-screen) */
+.brand{
+  margin-left: clamp(-240px, -12vw, 0px);
+}
+
+/* On small screens, reset to safe */
+@media (max-width: 560px){
+  .brand{ margin-left: 0; }
+}
+</style>
+
+  
+
+
+  
+  
+<header id="top" class="hero hero--moulded">
+  <!-- Background (Image 2) -->
+  <img src="assets/images/Header Bg-02 NEW-01.jpg" alt="Background with flowers" class="hero-bg">
+
+  <!-- Center panel with moulding (Image 3 PNG) -->
+  <div class="panel">
+    <img src="assets/images/Header Moulding-03 NEW-02.png" alt="Decorative moulding" class="panel-img" />
+
+    <!-- Title block inside moulding -->
+    <div class="title-slot">
+      <div class="eyebrow">Wedding Profile</div>
+      <h1 class="title">Because your love story deserves a masterpiece.</h1>
+      <div class="script">MAKE MY EVENT</div>
+    </div>
+
+    <!-- Stats aligned to plaques -->
+    <div class="stats-slot">
+      <div class="stat">
+        <div class="n">10+ Years</div>
+        <div class="k">Experience</div>
+      </div>
+      <div class="stat">
+        <div class="n">1200+</div>
+        <div class="k">Happy Couples</div>
+      </div>
+      <div class="stat">
+        <div class="n">30%</div>
+        <div class="k">Recurrent Customers</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+:root {
+  --title-top: 31%;
+  --stats-bottom: 10%;
+  --stats-width: 96%;
+}
+
+/* ===== Hero background ===== */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero::after {
+  content: "";
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.15);
+  z-index: 1;
+}
+
+/* ===== Panel (moulding) ===== */
+.panel {
+  position: absolute;
+  left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  height: min(1100px, 100%);
+  width: auto;
+  z-index: 2;
+}
+.panel-img {
+  height: 100%;
+  width: auto;
+  display: block;
+  filter: drop-shadow(0 24px 50px rgba(0,0,0,0.55));
+  pointer-events: none;
+}
+
+/* ===== Title block ===== */
+.title-slot {
+  position: absolute;
+  left: 50%; top: var(--title-top);
+  transform: translate(-50%, -35%);
+  width: min(85%, 1200px);
+  text-align: center;
+  color: #f1e7c9;
+  padding: 0 1rem;
+}
+.eyebrow {
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  font-weight: 700;
+  opacity: .95;
+  color: #e7dbc1;
+  font-size: clamp(.8rem,1.2vw,1rem);
+}
+.title {
+  font-family: "Playfair Display", serif;
+  margin: .35rem 0 0;
+  line-height: 1.1;
+  font-size: clamp(26px, 4.2vw, 64px);
+}
+
+/* ===== Load AcademiaSSK Bold font from assets ===== */
+@font-face {
+  font-family: "AcademiaSSK";
+  src: url("assets/fonts/Academiassk Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ===== Script text now uses AcademiaSSK ===== */
+.script {
+  font-family: "AcademiaSSK", serif;
+  font-size: clamp(32px, 6vw, 80px);
+  color: #f1e7c9;
+  margin-top: .3rem;
+  font-weight: bold;
+}
+
+/* ===== Stats block ===== */
+.stats-slot {
+  position: absolute;
+  left: 50%;
+  bottom: var(--stats-bottom);
+  transform: translateX(-50%);
+  width: var(--stats-width);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(32px, 4vw, 120px);
+  text-align: center;
+  color: #f1e7c9;
+}
+.stats-slot .stat {
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+.stat .n {
+  font-family: "Playfair Display", serif;
+  font-weight: 800;
+  font-size: clamp(15px, 1.8vw, 28px);
+  color: #fff2d6;
+}
+.stat .k {
+  margin-top: .25rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  font-size: clamp(9px, .9vw, 12px);
+  color: #eadbb7;
+  text-transform: uppercase;
+}
+
+/* ===== Responsive tweaks ===== */
+@media (max-width: 900px) {
+  :root {
+    --title-top: 33%;
+    --stats-bottom: 6.5%;
+    --stats-width: 82%;
+  }
+  .panel { height: clamp(500px, 86vh, 980px); }
+}
+@media (max-width: 560px) {
+  :root {
+    --title-top: 35%;
+    --stats-bottom: 6%;
+    --stats-width: 86%;
+  }
+  .script { margin-top: .15rem; }
+}
+</style>
+
+<!-- 98% feedback -->
+
+<section class="trusted-scene" aria-label="Trusted feedback showcase">
+  <!-- Left column with badge -->
+  <div class="left-col">
+    <img class="badge"
+         src="assets/images/trusted%20feedback%20info%20image-03.png"
+         alt="98% trusted feedback on Facebook, 146+ reviews" />
+  </div>
+
+  <!-- Right column with text -->
+  <div class="right-col">
+    <div class="copy-wrap" role="presentation">
+      <span class="line-1">
+        We don’t want to be a one-time choice, for our clients.<br>
+        Our goal is to ensure that, whenever a special moment arises in their lives,<br>
+        the first name they think of is
+      </span>
+      <span class="line-2"> MAKE MY EVENT.</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  @font-face{
+    font-family: "Tangerine-Regular";
+    src: url("assets/fonts/Tangerine-Bold.ttf") format("truetype");
+    font-weight: 400; font-style: normal; font-display: swap;
+  }
+  @font-face{
+    font-family: "AcademiaSSK Bold";
+    src: url("assets/fonts/AcademiaSSK Bold.ttf") format("truetype");
+    font-weight: 700; font-style: normal; font-display: swap;
+  }
+
+  .trusted-scene{
+    position:relative;
+    min-height:100vh;
+    width:100%;
+    overflow:hidden;
+    background-image: url("assets/images/Trusted%20Feedback%2098%25%20Bg-02.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display:grid;
+    grid-template-columns: 1fr 1fr; /* left + right halves */
+    align-items:center;
+  }
+  .trusted-scene::after{
+    content:"";
+    position:absolute; inset:0;
+    background: linear-gradient(120deg, rgba(0,0,0,0.05), rgba(0,0,0,0.18));
+    pointer-events:none;
+  }
+
+  /* Left column */
+  .left-col{
+    position:relative;
+    display:flex;
+    align-items:flex-end;
+    justify-content:center;
+    padding:clamp(16px, 3vw, 40px);
+    z-index:2;
+  }
+
+  /* Badge */
+  .badge{
+    /* Desktop/tablet: original shifted position + pop */
+    width: clamp(300px, 36vw, 540px);
+    transform: translateX(20%) scale(.88);  /* shift slightly right */
+    opacity:0;
+    transition: transform .45s cubic-bezier(.2,.7,.2,1), opacity .35s ease;
+    filter: drop-shadow(0 18px 34px rgba(0,0,0,.45));
+    pointer-events:none;
+  }
+  .trusted-scene:hover .badge,
+  .trusted-scene:focus-within .badge{
+    transform: translateX(20%) scale(1);
+    opacity:1;
+  }
+  @media (hover: none) {
+    .badge{ opacity:1; transform:translateX(20%) scale(1); }
+  }
+
+  /* Right column */
+  .right-col{
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+    padding:clamp(16px, 4vw, 64px);
+    z-index:2;
+  }
+  .copy-wrap{
+    max-width:880px;
+    color:#f1e7c9;
+    position: relative;
+    transform: translate(-25%, -120%); /* 20% left, 30% up */
+  }
+
+  /* 10% larger typography (and inline so line-2 starts right after the third line) */
+  .line-1{
+    display:inline;
+    font-family:"Tangerine-Regular", cursive;
+    font-size: clamp(20px, 2.64vw, 31px); /* +10% from previous */
+    line-height:1.3;
+    letter-spacing:.01em;
+    color:#585858;
+  }
+  .line-2{
+    display:inline;
+    font-family:"AcademiaSSK Bold", "Times New Roman", serif;
+    font-weight:700;
+    font-size: clamp(22px, 3.08vw, 35px); /* +10% from previous */
+    letter-spacing:.04em;
+    color:#585858;
+    margin-left:.25ch;        /* tiny gap after “is” */
+    vertical-align:baseline;
+  }
+
+  /* Mobile: stack and center; keep badge centered & 10% lower when minimized */
+  @media (max-width: 800px){
+    .trusted-scene{
+      grid-template-columns: 1fr;
+      grid-auto-rows: auto;
+      padding:20px;
+    }
+    .left-col{
+      justify-content:center;
+      margin-bottom:20px;
+    }
+    .right-col{
+      justify-content:center;
+      text-align:center;
+    }
+    .copy-wrap{
+      transform: translate(0, 0); /* cancel offsets so text centers on small screens */
+      margin: 0 auto;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 640px){
+    .badge{
+      width: 360px;        /* keep badge large on phones */
+      max-width: 95vw;
+      transform: translateY(10%) scale(.88);  /* centered and 10% lower */
+      opacity:0;
+    }
+    .trusted-scene:hover .badge,
+    .trusted-scene:focus-within .badge,
+    .badge:active{
+      transform: translateY(10%) scale(1);   /* pop-up grows in place */
+      opacity:1;
+    }
+  }
+</style>
+
+
+
+
+
+
+
+
+  <section id="about" class="about-scene">
+  <!-- FULLSCREEN BACKGROUND (covers whole viewport width/height) -->
+  <img class="wall-bg" src="assets/images/about-bg new-01.jpg" alt="Red wall background">
+
+  <div class="about-stage">
+    <!-- Framed Photos (same positions as your original code) -->
+    <img class="frame-img frame-portrait" src="assets/images/frame-portrait.jpg" alt="Framed portrait">
+    <img class="frame-img frame-top"      src="assets/images/Framed couple top.jpg" alt="Framed couple top">
+    <img class="frame-img frame-bottom"   src="assets/images/frame-bottom.jpg" alt="Framed couple bottom">
+
+    <!-- Text Content -->
+    <div class="about-copy">
+      <div class="eyebrow">About Us</div>
+      <h2 class="title">We bring your events to life with creativity & precision.</h2>
+      <p class="quote">
+        Make My Event was established in 2015 in Bangladesh with the purpose to bring your events to life with creativity,
+        precision and a passion for excellence. We specialize in designing and executing dynamic experiences — from
+        weddings and corporate events such as product launches and conferences to galas and team-building retreats.
+        Our expert team handles every detail, blending innovative concepts with seamless logistics to deliver inspiring
+        and connecting events. With a client-first approach and flawless execution, we transform ideas into unforgettable
+        events. Trusted by fortune 1000+ clients across Bangladesh, we help businesses make a bold statement.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+/* ===== Section wrapper: fullscreen, responsive background ===== */
+.about-scene{
+  position:relative;
+  min-height:100vh;
+  overflow:hidden;
+}
+
+/* Fullscreen background image */
+.wall-bg{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit:cover;         /* behaves like background-size: cover */
+  z-index:0;
+}
+
+/* Content layer above the background */
+.about-stage{
+  position:relative;
+  z-index:1;
+  min-height:clamp(680px, 95vh, 980px);
+  overflow:hidden;
+}
+
+/* Subtle overlay for readability (same as your code) */
+.about-stage::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.25));
+  z-index:1;
+}
+
+/* ===== Framed Images (exact positions from your original) ===== */
+.frame-img{
+  position:absolute;
+  display:block;
+  object-fit:cover;
+  filter:drop-shadow(0 24px 40px rgba(0,0,0,.55));
+  z-index:2; /* above bg + overlay */
+}
+
+.frame-portrait{
+  left:clamp(24px, 6vw, 72px);
+  top:clamp(40px, 8vh, 90px);
+  width:clamp(240px, 23vw, 360px);
+  aspect-ratio:480 / 778;
+}
+
+.frame-top{
+  left:calc(clamp(24px, 6vw, 72px) + clamp(240px, 23vw, 360px) + clamp(20px, 2vw, 28px));
+  top:clamp(48px, 9vh, 100px);
+  width:clamp(220px, 18vw, 300px);
+  aspect-ratio:525 / 430;
+}
+
+.frame-bottom{
+  left:calc(clamp(24px, 6vw, 72px) + clamp(240px, 23vw, 360px) + clamp(20px, 2vw, 28px));
+  top:calc(clamp(48px, 9vh, 100px) + clamp(220px, 18vw, 300px) + clamp(22px, 2vh, 28px));
+  width:clamp(220px, 18vw, 300px);
+  aspect-ratio:525 / 429;
+}
+
+/* ===== Copy Block (center-right; no border) ===== */
+.about-copy{
+  position:absolute;
+  right:clamp(24px, 6vw, 80px);
+  top:50%;
+  transform:translateY(-50%);
+  width:min(1000px, 50vw);
+  padding:clamp(18px, 2vw, 28px);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.18));
+  /* no border */
+  border-radius:16px;
+  box-shadow:0 14px 50px rgba(0,0,0,.55);
+  color:#f1e7c9;
+  z-index:2; /* above frames if overlapping */
+}
+
+.about-copy .eyebrow{
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  font-weight:700;
+  opacity:.9;
+  font-size:.9rem;
+}
+.about-copy .title{
+  font-size:clamp(24px, 3.2vw, 40px);
+  line-height:1.2;
+  margin:.4rem 0 1rem;
+}
+.about-copy .quote{
+  margin-top:.8rem;
+  line-height:1.6;
+  font-style:italic;
+}
+
+/* ===== Responsive behavior (same logic as your original) ===== */
+@media (max-width:980px){
+  .about-copy{
+    position:static;          /* drop into flow below the collage */
+    transform:none;
+    width:auto;
+    margin:24px 16px;
+  }
+  .about-stage{ padding-bottom:24px; }
+
+  /* Reflow frames for tablet */
+  .frame-portrait{
+    left:20px; top:40px; width:42vw;
+  }
+  .frame-top{
+    left:calc(20px + 42vw + 14px); top:40px; width:34vw;
+  }
+  .frame-bottom{
+    left:calc(20px + 42vw + 14px); width:34vw;
+    /* keep natural vertical spacing from your original calc */
+  }
+}
+
+@media (max-width:640px){
+  .about-stage{ min-height:auto; padding:20px 0 40px; }
+
+  /* On small phones, stack frames vertically */
+  .frame-img{
+    position:static;
+    width:88vw;
+    max-width:460px;
+    margin:12px auto;
+    display:block;
+  }
+
+  .about-copy{
+    margin:12px auto 18px;
+    width:min(92vw, 640px);
+  }
+}
+</style>
+
+
+<!-- DECORATION SECTION -->
+<section id="decoration" class="decor-scene">
+  <div class="decor-stage">
+    <!-- Background wall -->
+    <img src="assets/images/decor-wall.jpg" alt="Red wall background" class="decor-bg" />
+
+    <!-- Wooden base -->
+    <img src="assets/images/decor-ledge.jpg" alt="Wooden base" class="decor-ledge" />
+
+    <!-- Frames -->
+    <div class="decor-frames">
+      <img src="assets/images/frame-left.jpg"   alt="Framed photo left"   class="decor-frame" />
+      <img src="assets/images/frame-center.jpg" alt="Framed photo center" class="decor-frame" />
+      <img src="assets/images/frame-right.jpg"  alt="Framed photo right"  class="decor-frame" />
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX (new) -->
+<div id="decorLightbox" class="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
+  <button class="lb-close" aria-label="Close preview">×</button>
+  <img class="lb-img" alt="" src="">
+</div>
+
+<style>
+/* ===== Your existing decoration styles (kept) ===== */
+.decor-scene{position:relative;padding:0;overflow:hidden;min-height:clamp(520px,88vh,900px)}
+.decor-stage{position:relative;width:100%;height:100%;min-height:inherit;overflow:hidden}
+.decor-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.decor-ledge{position:absolute;left:0;right:0;bottom:0;width:100%;height:auto;z-index:1;max-height:clamp(80px,16vh,180px);object-fit:cover}
+.decor-frames{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2.5vw,28px);max-width:1600px;margin:0 auto;padding:clamp(24px,5vw,48px);min-height:60vh;align-items:center}
+.decor-frame{width:100%;height:auto;display:block;filter:drop-shadow(0 18px 36px rgba(0,0,0,.5));border-radius:4px;aspect-ratio:4/5;object-fit:cover;cursor:zoom-in}
+
+/* Hover preview only on devices that support hover */
+@media (hover: hover) and (pointer: fine) {
+  .decor-frame {
+    cursor: zoom-in;
+    transition: transform 200ms ease, filter 200ms ease, box-shadow 200ms ease;
+    transform-origin: center;
+    will-change: transform, filter;
+    position: relative;        /* so z-index works */
+    z-index: 2;
+  }
+
+  .decor-frame:hover,
+  .decor-frame:focus-visible {
+    transform: translateY(-6px) scale(1.05);         /* <-- pop up a bit */
+    filter: drop-shadow(0 28px 48px rgba(0,0,0,.55));
+    z-index: 5;                                      /* hover above neighbors */
+  }
+
+  .decor-frame:active {
+    transform: translateY(-4px) scale(1.03);         /* subtle press state */
+  }
+
+  .decor-frame:focus-visible {
+    outline: 2px solid #fff;                         /* keyboard visible focus */
+    outline-offset: 4px;
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .decor-frame {
+    transition: none;
+  }
+}
+
+/* Responsive (kept) */
+@media (max-width:1100px){
+  .decor-frames{max-width:1000px;gap:clamp(12px,2vw,22px);padding:clamp(16px,4vw,28px)}
+}
+@media (max-width:900px){
+  .decor-frames{grid-template-columns:repeat(2,1fr);min-height:56vh}
+  .decor-frame:nth-child(3){grid-column:1/-1;justify-self:center;width:min(520px,90%)}
+}
+@media (max-width:600px){
+  .decor-frames{grid-template-columns:1fr;gap:16px;min-height:auto;padding:18px 16px 120px}
+  .decor-frame{width:92%;margin:0 auto;aspect-ratio:auto}
+  .decor-ledge{max-height:120px}
+}
+
+/* ===== Lightbox styles (new) ===== */
+.lightbox{
+  position:fixed; inset:0;
+  display:none; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.85);
+  z-index:1000; padding:20px;
+}
+.lightbox.active{display:flex}
+.lightbox .lb-img{
+  max-width:min(1200px,92vw);
+  max-height:90vh;
+  width:auto; height:auto;
+  border-radius:10px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+}
+.lb-close{
+  position:absolute; top:16px; right:16px;
+  border:0; border-radius:8px;
+  background:rgba(0,0,0,.55); color:#fff;
+  font-size:28px; line-height:1; padding:8px 12px;
+  cursor:pointer;
+}
+.lb-close:focus{outline:2px solid #fff; outline-offset:2px}
+</style>
+
+<script>
+(() => {
+  const frames = document.querySelectorAll('#decoration .decor-frame');
+  const overlay = document.getElementById('decorLightbox');
+  const overlayImg = overlay.querySelector('.lb-img');
+  const closeBtn = overlay.querySelector('.lb-close');
+
+  function openLightbox(src, alt) {
+    overlayImg.src = src;
+    overlayImg.alt = alt || '';
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    closeBtn.focus();
+  }
+  function closeLightbox() {
+    overlay.classList.remove('active');
+    overlayImg.src = '';
+    document.body.style.overflow = '';
+  }
+
+  frames.forEach(img => {
+    // allow keyboard activation too
+    img.tabIndex = 0;
+    img.addEventListener('click', () => openLightbox(img.dataset.full || img.src, img.alt));
+    img.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openLightbox(img.dataset.full || img.src, img.alt); }
+    });
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeLightbox(); });
+  window.addEventListener('keydown', e => { if (e.key === 'Escape' && overlay.classList.contains('active')) closeLightbox(); });
+})();
+</script>
+
+
+
+
+
+
+  <!-- SEGMENTS (HTML + CSS only) -->
+<section id="segments" class="segments-scene">
+  <div class="segments-stage">
+    <!-- Background (Image #2) -->
+    <img src="assets/images/segments-bg.jpg" alt="" class="segments-bg" aria-hidden="true">
+
+    <div class="segments-container">
+      <h2 class="segments-heading">
+        <span>OUR</span>
+        <span>SEGMENTS</span>
+      </h2>
+
+      <div class="segments-grid">
+        <!-- CLASSIC -->
+        <a href="#seg-classic" class="segment-card" aria-label="Open Classic Touch">
+          <div class="segment-card-inner">
+            <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
+            <div class="segment-content">
+              <h3 class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
+                <strong>Traditional yet graceful,</strong> this package covers all the essential décor elements
+                to make your wedding simple, beautiful, and memorable without compromise.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- PREMIUM -->
+        <a href="#seg-premium" class="segment-card" aria-label="Open Premium Touch">
+          <div class="segment-card-inner">
+            <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
+            <div class="segment-content">
+              <h3 class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
+                <strong>A touch of royal sophistication —</strong> designed for couples who want refined elegance,
+                stylish details, and a charming ambience that leaves a lasting impression.
+              </p>
+            </div>
+          </div>
+        </a>
+
+        <!-- SIGNATURE -->
+        <a href="#seg-signature" class="segment-card" aria-label="Open Signature Touch">
+          <div class="segment-card-inner">
+            <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
+            <div class="segment-content">
+              <h3 class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
+                <strong>The ultimate grandeur experience —</strong> a lavish, bespoke décor journey where every detail
+                is tailored to perfection, creating a truly unforgettable celebration.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CSS-ONLY MODALS (one per arch) -->
+<div id="seg-classic" class="seg-modal" aria-hidden="true">
+  <a href="#segments" class="seg-close" aria-label="Close">×</a>
+  <div class="seg-modal-card">
+    <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="" aria-hidden="true">
+    <div class="seg-modal-content">
+      <h3 class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
+      <p class="seg-text">
+        <strong>Traditional yet graceful,</strong> this package covers all the essential décor elements to make
+        your wedding simple, beautiful, and memorable without compromise.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="seg-premium" class="seg-modal" aria-hidden="true">
+  <a href="#segments" class="seg-close" aria-label="Close">×</a>
+  <div class="seg-modal-card">
+    <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="" aria-hidden="true">
+    <div class="seg-modal-content">
+      <h3 class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
+      <p class="seg-text">
+        <strong>A touch of royal sophistication —</strong> designed for couples who want refined elegance,
+        stylish details, and a charming ambience that leaves a lasting impression.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div id="seg-signature" class="seg-modal" aria-hidden="true">
+  <a href="#segments" class="seg-close" aria-label="Close">×</a>
+  <div class="seg-modal-card">
+    <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="" aria-hidden="true">
+    <div class="seg-modal-content">
+      <h3 class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
+      <p class="seg-text">
+        <strong>The ultimate grandeur experience —</strong> a lavish, bespoke décor journey where every detail
+        is tailored to perfection, creating a truly unforgettable celebration.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ===== Base scene ===== */
+.segments-scene{position:relative; padding:0; overflow:hidden}
+.segments-stage{position:relative; min-height:clamp(640px, 92vh, 1100px)}
+.segments-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+
+/* Container & heading */
+.segments-container{position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:56px 20px}
+.segments-heading{text-align:center; color:#f1e7c9; margin:0 0 24px; font-family:"Playfair Display",serif}
+.segments-heading span{display:block; font-size:clamp(40px,6vw,72px); letter-spacing:.06em; line-height:1.05}
+.segments-heading::after{content:""; display:block; width:160px; max-width:40%; height:2px; margin:14px auto 6px; background:#f1e7c9; opacity:.6}
+
+/* Grid of 3 arches */
+.segments-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.5vw,28px); margin-top:clamp(12px,1.5vw,24px)}
+
+/* Card */
+.segment-card{display:block; text-decoration:none; color:inherit; outline:none}
+.segment-card-inner{
+  position:relative; aspect-ratio:4/5; display:block; isolation:isolate;
+  filter:drop-shadow(0 16px 36px rgba(0,0,0,.45));
+  transition:transform .2s ease, filter .2s ease; transform-origin:center; will-change:transform, filter;
+  cursor:zoom-in;
+}
+.segment-arch{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; pointer-events:none}
+.segment-content{position:absolute; inset:0; z-index:2; color:#f1e7c9; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:clamp(18px,3.5vw,28px)}
+.seg-title{margin:0 0 .5rem; line-height:1.05; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(26px,3.8vw,40px)}
+.seg-title small{display:block; font-weight:500; letter-spacing:.18em; font-size:clamp(14px,1.6vw,18px)}
+.seg-text{max-width:80%; margin:.5rem auto 0; line-height:1.7; font-size:clamp(13px,1.4vw,16px); color:#f1e7c9}
+
+/* Hover “pop a bit” */
+@media (hover:hover) and (pointer:fine){
+  .segment-card-inner:hover, .segment-card:focus-visible .segment-card-inner{
+    transform:translateY(-8px) scale(1.04);
+    filter:drop-shadow(0 26px 48px rgba(0,0,0,.55));
+  }
+  .segment-card:focus-visible{outline:2px solid #fff; outline-offset:6px; border-radius:8px}
+}
+
+/* Responsive */
+@media (max-width:980px){
+  .segments-grid{grid-template-columns:1fr; max-width:720px; margin:0 auto}
+}
+
+/* ===== CSS-only modal ===== */
+.seg-modal{
+  position:fixed; inset:0; display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.86); padding:20px; z-index:1000;
+  opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility .2s ease;
+}
+.seg-modal:target{opacity:1; visibility:visible; pointer-events:auto}
+.seg-close{
+  position:absolute; top:18px; right:18px; z-index:1001; text-decoration:none;
+  border:0; border-radius:10px; padding:8px 12px; background:rgba(0,0,0,.55); color:#fff;
+  font-size:30px; line-height:1; cursor:pointer;
+}
+.seg-modal-card{position:relative; width:min(900px,92vw); aspect-ratio:4/5; display:flex; align-items:center; justify-content:center}
+.seg-modal-arch{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:drop-shadow(0 22px 50px rgba(0,0,0,.6))}
+.seg-modal-content{position:relative; z-index:1; color:#f1e7c9; text-align:center; padding:clamp(18px,3vw,32px)}
+.seg-modal-content .seg-title{font-size:clamp(34px,4.8vw,56px)}
+.seg-modal-content .seg-title small{font-size:clamp(16px,1.8vw,20px)}
+.seg-modal-content .seg-text{max-width:760px; margin:10px auto 0; font-size:clamp(14px,1.5vw,18px)}
+</style>
+
+
+
+
+
+
+<!-- ===== GALLERY (ALBUMS) ===== -->
+<section id="gallery" class="section gallery-scene">
+  <!-- Fullscreen responsive background -->
+  <img src="assets/images/Header Background-01.jpg" alt="Gallery background" class="gallery-bg">
+
+  <div class="segments-container"><!-- reuse same container spacing -->
+    <!-- Match OUR SEGMENTS heading style -->
+    <h2 class="segments-heading">
+      <span>OUR</span>
+      <span>GALLERY</span>
+    </h2>
+
+    <div id="lightgallery" class="gallery-grid">
+      <!-- Album 1 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album1/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album1/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album1/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album1/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album1/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album1/img3-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album1/cover-thumb.jpg" alt="Wedding Ceremony album cover">
+        <span class="album-title">Asif Bahar's Haldi Ceremony</span>
+      </a>
+
+      <!-- Album 2 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album2/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album2/img1-thumb.jpg&quot;},
+           { &quot;src&quot;: &quot;assets/images/album2/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album2/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album2/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album2/img3-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album2/cover-thumb.jpg" alt="Reception album cover">
+        <span class="album-title">Chandrima's Reception Ceremony</span>
+      </a>
+
+      <!-- Album 3 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album3/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album3/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album3/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album3/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album3/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album3/img3-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album3/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Nibir's Reception Ceremony</span>
+      </a>
+      
+      <!-- Album 4 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album4/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album4/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album4/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album4/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album4/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album4/img3-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album4/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Methila's Photoshoot</span>
+      </a>
+
+      <!-- Album 5 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album5/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album5/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album5/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album5/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album5/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album5/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album5/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album5/img4-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album5/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Yamin's Reception</span>
+      </a>
+
+      <!-- Album 6 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album6/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album6/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album6/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album6/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album6/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album6/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album6/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album6/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album6/img5-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album6/img5-thumb.jpg&quot; }
+         ]">
+        <img src="assets/images/album6/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Afroza's Haldi Night</span>
+      </a>
+
+      <!-- Album 7 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album7/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img5-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img5-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img6-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img6-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img7-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img7-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img8-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img8-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img9-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img9-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album7/img10-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album7/img10-thumb.jpg&quot;}
+         ]">
+        <img src="assets/images/album7/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Angel's Reception Ceremonyt</span>
+      </a>
+
+
+      <!-- Album 8 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album8/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img5-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img5-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img6-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img6-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img7-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img7-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img8-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img8-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img9-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img9-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album8/img10-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img10-thumb.jpg&quot;},
+           { &quot;src&quot;: &quot;assets/images/album8/img11-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img11-thumb.jpg&quot;},
+           { &quot;src&quot;: &quot;assets/images/album8/img12-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img12-thumb.jpg&quot;},
+           { &quot;src&quot;: &quot;assets/images/album8/img13-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img13-thumb.jpg&quot;},
+           { &quot;src&quot;: &quot;assets/images/album8/img14-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album8/img14-thumb.jpg&quot;}
+         ]">
+        <img src="assets/images/album8/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Badhon's Haldi Night</span>
+      </a>
+
+      <!-- Album 9 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album9/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img5-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img5-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img6-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img6-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img7-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img7-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img8-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img8-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album9/img9-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album9/img9-thumb.jpg&quot; }
+          
+         ]">
+        <img src="assets/images/album9/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Imtiaz & Rosan's Reception</span>
+      </a>
+
+      <!-- Album 10 -->
+      <a href="#" class="album"
+         data-album="[
+           { &quot;src&quot;: &quot;assets/images/album10/img1-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img1-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img2-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img2-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img3-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img3-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img4-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img4-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img5-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img5-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img6-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img6-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img7-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img7-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img8-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img8-thumb.jpg&quot; },
+           { &quot;src&quot;: &quot;assets/images/album10/img9-large.jpg&quot;, &quot;thumb&quot;: &quot;assets/images/album10/img9-thumb.jpg&quot; }
+          
+         ]">
+        <img src="assets/images/album10/cover-thumb.jpg" alt="Engagement album cover">
+        <span class="album-title">Maisha's Haldi Ceremony</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<style>
+/* Section wrapper with background */
+.gallery-scene {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+.gallery-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure jumping back to #gallery doesn't hide under sticky nav */
+#gallery { scroll-margin-top: 100px; } /* adjust to your nav height */
+
+/* Content above background */
+.gallery-scene .container,
+.gallery-scene .segments-container {
+  position: relative;
+  z-index: 1;
+  padding: clamp(40px, 6vw, 80px) 20px;
+}
+
+/* Grid and items */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 32px;
+}
+.gallery-grid a {
+  position: relative;
+  display: block;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,.35);
+  cursor: pointer;
+  text-decoration: none;
+}
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform .3s ease;
+}
+.gallery-grid a:hover img { transform: scale(1.05); }
+.album-title {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.6); color: #fff; font-weight: 600;
+  text-align: center; padding: 8px; font-size: 1rem;
+}
+
+/* Keep #gallery visible under a sticky nav when jumping back */
+#gallery { scroll-margin-top: 100px; } /* adjust to your nav height */
+
+/* If LG has finished (html not .lg-on), make any leftover overlay inert */
+html:not(.lg-on) .lg-backdrop,
+html:not(.lg-on) .lg-container {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Extra safety: when we set this class during cleanup, nuke overlays */
+html.lg-force-closed .lg-backdrop,
+html.lg-force-closed .lg-container,
+html.lg-force-closed .lg-outer {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+
+</style>
+
+
+
+<!-- LightGallery CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/css/lightgallery-bundle.min.css">
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/lightgallery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/zoom/lg-zoom.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@2.7.2/plugins/thumbnail/lg-thumbnail.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  if (typeof lightGallery === 'undefined') return;
+
+  const grid = document.getElementById('lightgallery');
+  if (!grid) return;
+  if (!grid.hasAttribute('tabindex')) grid.setAttribute('tabindex', '-1');
+
+  // Single hidden root to avoid binding LG to <a> elements
+  const lgRoot = document.createElement('div');
+  lgRoot.id = 'lg-dynamic-root';
+  document.body.appendChild(lgRoot);
+
+  let lgInstance = null;
+
+  // --- Helpers ---
+  const parseAlbum = (raw) => {
+    try { return JSON.parse(raw); }
+    catch { try { return JSON.parse(raw.replace(/&quot;/g, '"')); } catch { return []; } }
+  };
+  const escapeHTML = (s='') =>
+    s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+  const normKey = (url='') => url.toLowerCase().split('/').pop().replace(/-thumb|-large/g, '');
+  const prependCover = (card, items) => {
+    const imgEl = card.querySelector('img');
+    const coverSrc = card.getAttribute('data-cover') || (imgEl && imgEl.getAttribute('src')) || '';
+    const coverTitle = (card.querySelector('.album-title')?.textContent || '').trim();
+    if (!coverSrc) return items;
+    const coverKey = normKey(coverSrc);
+    const first = { src: coverSrc, thumb: coverSrc, subHtml: coverTitle ? `<h4>${escapeHTML(coverTitle)}</h4>` : '' };
+    return [first, ...items.filter(it => normKey(it.src || it.thumb) !== coverKey)];
+  };
+
+  // Watch for any lingering LG overlays after close, and remove them
+  const overlayObserver = new MutationObserver(() => {
+    if (!document.documentElement.classList.contains('lg-on')) {
+      document.querySelectorAll('.lg-outer, .lg-backdrop, .lg-container').forEach(n => { try { n.remove(); } catch(_) {} });
+    }
+  });
+  overlayObserver.observe(document.body, { childList: true, subtree: true });
+
+  // HARD cleanup + jump to #gallery + restore focus (no second click)
+  function hardCleanupAndReturn(prevFocus) {
+    try { lgInstance && lgInstance.destroy(true); } catch(_) {}
+    lgInstance = null;
+
+    // Aggressive DOM clean (handles race with LG's internal anim/teardown)
+    document.querySelectorAll('.lg-outer, .lg-backdrop, .lg-container, .lg-toolbar, .lg-components')
+      .forEach(n => { try { n.remove(); } catch(_) {} });
+    lgRoot.innerHTML = '';
+
+    // Clear LG classes & scroll locks
+    document.documentElement.classList.remove('lg-on');
+    document.body.classList.remove('lg-on');
+    document.documentElement.style.overflow = '';
+    document.body.style.overflow = '';
+    document.body.style.removeProperty('padding-right');
+
+    // Ensure page accepts clicks immediately
+    document.documentElement.classList.add('lg-force-closed');
+    document.body.style.pointerEvents = 'auto';
+    setTimeout(() => {
+      document.documentElement.classList.remove('lg-force-closed');
+      document.body.style.pointerEvents = '';
+    }, 0);
+
+    // Jump back to the gallery section
+    const section = document.getElementById('gallery');
+    if (section && section.scrollIntoView) section.scrollIntoView({ behavior: 'auto', block: 'start' });
+    else location.hash = '#gallery';
+
+    // Restore focus so the page is usable with no extra click
+    requestAnimationFrame(() => {
+      document.activeElement?.blur?.();
+      if (prevFocus && typeof prevFocus.focus === 'function') prevFocus.focus();
+      else grid.focus();
+    });
+  }
+
+  // Faster, lighter LG config
+  const plugins = (typeof lgZoom !== 'undefined') ? [lgZoom] : [];
+  const baseConfig = {
+    plugins,
+    dynamic: true,
+    thumbnail: false,      // OFF → faster open
+    download: false,
+    escKey: true,
+    closable: true,
+    closeOnTap: true,
+    hideBarsDelay: 900,
+    speed: 160,            // quick animations
+    backdropDuration: 120, // quick fade
+    preload: 1,            // minimal preload
+    zoomFromOrigin: false, // skip heavy calc
+    mobileFirst: true,
+    hash: false
+  };
+
+  // Open handler for each album card
+  grid.querySelectorAll('a.album').forEach(card => {
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const raw = card.getAttribute('data-album') || '[]';
+      let items = parseAlbum(raw);
+      if (!items.length) return;
+      items = prependCover(card, items);
+
+      // Kill any previous instance
+      if (lgInstance) { try { lgInstance.destroy(true); } catch(_) {} lgInstance = null; }
+      const prevFocus = document.activeElement;
+
+      // Init on hidden root
+      lgInstance = lightGallery(lgRoot, { ...baseConfig, dynamicEl: items });
+      lgInstance.openGallery(0);
+
+      // Close handlers (cover all paths)
+      const closeOnce = () => {
+        hardCleanupAndReturn(prevFocus);
+        lgRoot.removeEventListener('lgBeforeClose', closeOnce);
+        lgRoot.removeEventListener('lgAfterClose', closeOnce);
+        document.removeEventListener('keyup', onKeyup, true);
+      };
+      const onKeyup = (ev) => { if (ev.key === 'Escape') closeOnce(); };
+
+      lgRoot.addEventListener('lgBeforeClose', closeOnce, { once: true });
+      lgRoot.addEventListener('lgAfterClose',  closeOnce, { once: true });
+      document.addEventListener('keyup', onKeyup, true);
+
+      // Also hook the visible close button as soon as it's available
+      const onAfterOpen = () => {
+        const btn = document.querySelector('.lg-close');
+        if (btn) btn.addEventListener('click', closeOnce, { once: true });
+        lgRoot.removeEventListener('lgAfterOpen', onAfterOpen);
+      };
+      lgRoot.addEventListener('lgAfterOpen', onAfterOpen, { once: true });
+    }, { passive: false });
+  });
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- OUR TEAM -->
+<!-- OUR TEAM -->
+<section id="team" class="section team-scene">
+  <div class="segments-container">
+      <h2 class="segments-heading">
+        <span>OUR TEAM</span>
+        
+      </h2>
+
+    <div class="team-layout">
+      <!-- Left: Lead portrait (large) -->
+      <figure class="lead card">
+        <img src="assets/images/team/S%20M%20Rezuanul%20Rafat.png" alt="S M Rezuanul Rafat">
+        <figcaption>
+          <div class="name">S M REZUANUL RAFAT</div>
+          <div class="role">Owner &amp; Managing Director</div>
+        </figcaption>
+      </figure>
+
+      <!-- Right: 3 x 2 -->
+      <div class="members">
+        <figure class="member card">
+          <img src="assets/images/team/Sohel%20Mahmud.png" alt="Sohel Mahmud">
+          <figcaption>
+            <div class="name">SOHEL MAHMUD</div>
+            <div class="role">Partner - Biriyani Bhai</div>
+          </figcaption>
+        </figure>
+
+        <figure class="member card">
+          <img src="assets/images/team/Thouhid%20Tushar.png" alt="Thouhid Tushar">
+          <figcaption>
+            <div class="name">THOUHID TUSHAR</div>
+            <div class="role">Head Of Creative</div>
+          </figcaption>
+        </figure>
+
+        <figure class="member card">
+          <img src="assets/images/team/Mitua%20Talukdar%20Hema.png" alt="Mitua Talukdar Hema">
+          <figcaption>
+            <div class="name">MITUA TALUKDER HEMA</div>
+            <div class="role">Marketing Director</div>
+          </figcaption>
+        </figure>
+
+        <figure class="member card">
+          <img src="assets/images/team/Mahidul%20Hassan%20Khan.png" alt="Mahidul Hassan Khan">
+          <figcaption>
+            <div class="name">MAHIDUL HASSAN KHAN</div>
+            <div class="role">Marketing Manager</div>
+          </figcaption>
+        </figure>
+
+        <figure class="member card">
+          <img src="assets/images/team/Sree%20Joy.png" alt="Sree Joy">
+          <figcaption>
+            <div class="name">SREE JOY</div>
+            <div class="role">Designer And Editor</div>
+          </figcaption>
+        </figure>
+
+        <figure class="member card">
+          <img src="assets/images/team/M%20Fazle%20rabbi.png" alt="M Fazle Rabbi">
+          <figcaption>
+            <div class="name">M FAZLE RABBI</div>
+            <div class="role">Operation Manager</div>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* ===========================
+   OUR TEAM — FULL STYLE (with larger left portrait)
+   =========================== */
+
+/* Fonts */
+@font-face{
+  font-family:"Themunday";
+  src:url("assets/fonts/Themundayfreeversion-Regular.ttf") format("truetype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Montserrat-Light";
+  src:url("assets/fonts/Montserrat-Light.ttf") format("truetype");
+  font-weight:300; font-style:normal; font-display:swap;
+}
+
+/* Section background & wrapper */
+.team-scene{
+  position:relative;
+  background:url("assets/images/Our%20team%20Bg.jpg") center/cover no-repeat;
+  padding:clamp(36px,5vw,70px) 20px;
+  color:#f6ead4;
+}
+.team-wrap{ position:relative; z-index:1; }
+
+/* Heading */
+.team-heading{ text-align:center; margin-bottom:clamp(22px,4vw,40px); }
+.team-title{
+  font-family:"Themunday", serif;
+  font-size:clamp(32px,5vw,64px);
+  letter-spacing:.06em;
+  color:#f4e1c6;
+}
+.team-underline{
+  display:inline-block; width:clamp(80px,20vw,260px); height:2px; background:#e6cfae;
+}
+
+/* Layout: large portrait on the left, 3x2 smaller cards on right */
+.team-layout{
+  display:grid;
+  grid-template-columns:minmax(300px,clamp(32%,34vw,480px)) 1fr;
+  gap:clamp(18px,3vw,36px);
+  align-items:start;
+}
+
+/* Cards — show PNGs EXACTLY (no borders, backgrounds, or cropping) */
+.card{
+  position:relative;
+  margin:0;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  filter:none;
+  border-radius:0;
+  overflow:visible;                 /* never clip PNG edges */
+  transition:transform .2s ease;
+}
+.card img{
+  display:block;
+  width:100%;
+  height:auto;                      /* preserve native ratio */
+  object-fit:contain;               /* never crop */
+  background:transparent;
+}
+
+/* Hover: subtle lift only (keeps PNG intact) */
+.card:hover{ transform:translateY(-6px); z-index:2; }
+
+/* ----- LEFT LEAD PORTRAIT: bigger & shifted left (right grid unchanged) ----- */
+.lead{
+  margin-left: clamp(-48px, -4.5vw, -120px); /* nudge whole figure left */
+}
+.lead img{
+  max-width:none;
+  width:112%;                       /* visually larger than its column */
+  margin-left:-6%;                  /* re-center after width increase */
+  height:auto;
+}
+.lead figcaption{
+  width:112%;
+  margin-left:-6%;
+}
+
+/* Lead caption (single line) */
+.lead figcaption .name{
+  font-family:"Themunday", serif;
+  font-size:clamp(18px,2vw,24px);
+  letter-spacing:.08em;
+  color:#f5e3c9;
+  white-space:nowrap;
+}
+.lead figcaption .role{
+  font-family:"Montserrat-Light", sans-serif;
+  font-size:clamp(14px,1.3vw,18px);
+  letter-spacing:.02em;
+  color:#e6cfb2;
+  margin-top:4px;
+  white-space:nowrap;
+}
+
+/* ----- RIGHT GRID — small cards like the mock; captions on one line ----- */
+.members{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(220px, 1fr)); /* small cards */
+  column-gap:clamp(20px,3vw,32px);
+  row-gap:clamp(16px,2.5vw,28px);
+}
+figcaption{ text-align:center; margin-top:10px; }
+
+.member figcaption .name{
+  font-family:"Themunday", serif;
+  font-size:clamp(12px,1.05vw,16px);  /* a bit smaller so it fits one line */
+  letter-spacing:.05em;
+  color:#f5e3c9;
+  white-space:nowrap;                  /* one line */
+}
+.member figcaption .role{
+  font-family:"Montserrat-Light", sans-serif;
+  font-size:clamp(11px,0.95vw,14px);
+  letter-spacing:.02em;
+  color:#e6cfb2;
+  margin-top:2px;
+  white-space:nowrap;                  /* one line */
+}
+
+/* Responsive */
+@media (max-width:1100px){
+  .team-layout{ grid-template-columns:1fr; }
+  .lead{ margin-left:0; }
+  .lead img{ width:100%; margin-left:0; }
+  .lead figcaption{ width:100%; margin-left:0; }
+}
+@media (max-width:860px){
+  .members{ grid-template-columns:repeat(2, minmax(220px, 1fr)); }
+}
+@media (max-width:560px){
+  .members{ grid-template-columns:1fr; }
+  .member figcaption .name{ font-size:16px; }
+  .member figcaption .role{ font-size:14px; }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+ <section id="testimonials" class="section testimonials">
+  <div class="segments-container"> 
+    <h2 class="segments-heading">
+      <span>OUR</span>
+      <span>TESTIMONIALS</span>
+    </h2>
+  </div>
+
+  <!-- Full-bleed wrapper so the slider spans edge-to-edge -->
+  <div class="slider-bleed">
+    <!-- Slider -->
+    <div class="slider" aria-label="Client reviews carousel">
+      <div class="slide-track">
+        <!-- One set -->
+        <img src="assets/images/Review-01.png" alt="Review 1" class="review-img" />
+        <img src="assets/images/Review-02.png" alt="Review 2" class="review-img" />
+        <img src="assets/images/Review-03.png" alt="Review 3" class="review-img" />
+        <img src="assets/images/Review-04.png" alt="Review 4" class="review-img" />
+        <img src="assets/images/Review-05.png" alt="Review 5" class="review-img" />
+        <img src="assets/images/Review-06.png" alt="Review 6" class="review-img" />
+        <img src="assets/images/Review-07.png" alt="Review 7" class="review-img" />
+        <img src="assets/images/Review-08.png" alt="Review 8" class="review-img" />
+        <img src="assets/images/Review-09.png" alt="Review 9" class="review-img" />
+        <img src="assets/images/Review-10.png" alt="Review 10" class="review-img" />
+        <img src="assets/images/Review-11.png" alt="Review 11" class="review-img" />
+        <!-- Duplicate set for seamless looping -->
+        <img src="assets/images/Review-01.png" alt="Review 1 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-02.png" alt="Review 2 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-03.png" alt="Review 3 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-04.png" alt="Review 4 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-05.png" alt="Review 5 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-06.png" alt="Review 6 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-07.png" alt="Review 7 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-08.png" alt="Review 8 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-09.png" alt="Review 9 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-10.png" alt="Review 10 duplicate" class="review-img" aria-hidden="true" />
+        <img src="assets/images/Review-11.png" alt="Review 11 duplicate" class="review-img" aria-hidden="true" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Popup modal -->
+  <div id="popup" class="popup" aria-hidden="true">
+    <button class="close" aria-label="Close">&times;</button>
+    <img class="popup-content" id="popup-img" alt="Expanded testimonial image" />
+  </div>
+</section>
+
+<style>
+/* Remove default page margin so the full-bleed works perfectly */
+html, body { margin: 0; }
+
+/* ===== Fullscreen Background Section ===== */
+#testimonials {
+  background: url("assets/images/Our%20team%20Bg.jpg") center/cover no-repeat;
+  position: relative;
+  min-height: 100vh;   /* Fullscreen height */
+  width: 100%;
+  overflow: hidden;
+  padding: 64px 20px 80px; /* keep padding for the heading block */
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertical center */
+}
+
+/* Full-bleed wrapper: makes slider span the entire viewport width */
+.slider-bleed{
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  width: 100vw;
+}
+
+/* ===== Slider ===== */
+.slider {
+  overflow: hidden;     /* neat edges */
+  padding: 14px 0;      /* breathing room */
+}
+.slide-track {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  /* Right-to-left */
+  transform: translateX(0%);
+  animation: scroll-rtl 38s linear infinite;
+  will-change: transform;
+}
+.slider:hover .slide-track { animation-play-state: paused; }
+
+.review-img {
+  width: clamp(220px, 22vw, 520px);
+  height: auto;
+  flex: 0 0 auto;
+  cursor: zoom-in;
+  filter: drop-shadow(0 10px 24px rgba(0,0,0,.35));
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.review-img:hover {
+  transform: scale(1.06);
+  z-index: 2;
+}
+
+/* Right-to-left animation (two identical sets → travel 0% to -50%) */
+@keyframes scroll-rtl {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== Modal / Lightbox ===== */
+.popup {
+  position: fixed; inset: 0;
+  display: none;
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,.82);
+  z-index: 1000;
+}
+.popup[aria-hidden="false"] { display: flex; }
+
+.popup-content {
+  max-width: min(92vw, 1200px);
+  max-height: 86vh;
+  border-radius: 8px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.6);
+  animation: zoomIn .28s ease;
+}
+@keyframes zoomIn {
+  from { transform: scale(.8); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.close {
+  position: absolute; top: 16px; right: 18px;
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255,255,255,.15);
+  color: #fff; font-size: 30px; line-height: 1;
+  display: grid; place-items: center;
+  cursor: pointer;
+  transition: background .2s ease;
+}
+.close:hover { background: rgba(255,255,255,.25); }
+
+@media (max-width: 600px) {
+  .segments-heading { font-size: 1.6rem; letter-spacing: .08em; }
+  .slide-track { gap: 14px; }
+}
+</style>
+
+<script>
+  // Modal behavior
+  const popup = document.getElementById("popup");
+  const popupImg = document.getElementById("popup-img");
+  const closeBtn = document.querySelector(".close");
+
+  // Open on click
+  document.querySelectorAll(".review-img").forEach(img => {
+    img.addEventListener("click", () => {
+      popupImg.src = img.src;
+      popup.setAttribute("aria-hidden", "false");
+    });
+  });
+
+  // Close on ✕
+  closeBtn.addEventListener("click", () => {
+    popup.setAttribute("aria-hidden", "true");
+    popupImg.removeAttribute("src");
+  });
+
+  // Close when clicking backdrop
+  popup.addEventListener("click", (e) => {
+    if (e.target === popup) {
+      popup.setAttribute("aria-hidden", "true");
+      popupImg.removeAttribute("src");
+    }
+  });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <section id="contact" class="section">
+  <div class="container contact">
+
+    <!-- Contact Info -->
+    <div class="frame contact-card">
+      <div class="eyebrow">Contact</div>
+      <h2 class="title">Let’s make your event unforgettable</h2>
+
+      <!-- Address -->
+      <div class="item">
+        <span class="ico">📍</span>
+        <div>94 Road No. 2, Block A, Niketon, Gulshan, Dhaka 1212</div>
+      </div>
+
+      <!-- Phone -->
+      <div class="item">
+        <span class="ico">📞</span>
+        <a href="tel:+8801799888222" class="link">+88 017 99 888 222</a>
+      </div>
+
+      <!-- Email -->
+      <div class="item">
+        <span class="ico">✉️</span>
+        <a href="mailto:smrafat@gmail.com" class="link">smrafat@gmail.com</a>
+      </div>
+
+      <!-- Socials -->
+      <div class="socials">
+        <a href="https://www.facebook.com/makemyevent" target="_blank" rel="noopener" class="social fb">
+          <img src="https://cdn-icons-png.flaticon.com/512/124/124010.png" alt="Facebook" />
+        </a>
+        <a href="https://www.instagram.com/make_my_event_bd/?igsh=MXF4aDZvczRtZGxtNA%3D%3D#" target="_blank" rel="noopener" class="social ig">
+          <img src="https://cdn-icons-png.flaticon.com/512/1384/1384063.png" alt="Instagram" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Google Map -->
+    <div class="frame map-card">
+      <iframe
+        src="https://www.google.com/maps?q=94+Road+No.+2,+Block+A,+Niketon,+Gulshan,+Dhaka+1212&output=embed"
+        allowfullscreen
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* Layout */
+.container.contact {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;            /* CHANGED: was start → stretch to equalize heights */
+}
+
+.frame {
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(0,0,0,0.35);
+  color: #f1e7c9;
+  backdrop-filter: blur(6px);
+
+  /* NEW: make each card fill the row height */
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;                /* ensures rounded corners clip the content */
+}
+
+.contact-card .title { margin-top: 6px; }
+
+/* Items */
+.item {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 12px 0;
+}
+.ico {
+  font-size: 20px;
+}
+.link {
+  color: #f1e7c9;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.link:hover { border-bottom-color: #f1e7c9; }
+
+/* Social Icons */
+.socials {
+  display: flex;
+  gap: 12px;
+  margin-top: 16px;
+}
+.social img {
+  width: 36px;
+  height: 36px;
+  display: block;
+  transition: transform 0.2s ease;
+}
+.social img:hover { transform: scale(1.15); }
+
+/* Map */
+.map-card {
+  padding: 24px;                  /* CHANGED: was 0 → match left card padding */
+}
+.map-card iframe {
+  display: block;
+  width: 100%;
+
+  /* Fill the card’s height so both boxes match exactly */
+  height: 100%;
+  min-height: 420px;              /* keep a sensible minimum */
+  border: 0;
+  border-radius: 12px;            /* inner rounding (optional) */
+  flex: 1 1 auto;                 /* let it grow to fill card */
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .container.contact { grid-template-columns: 1fr; }
+  .map-card iframe { min-height: 300px; }
+}
+</style>
+
+
+  
+ <footer>
+  <div class="container">
+    © <span id="y"></span> Make My Event. All rights reserved.
+  </div>
+</footer>
+
+<style>
+footer {
+  text-align: center;   /* centers the text */
+  padding: 20px;        /* some breathing space */
+  color: #f1e7c9;       /* optional: match your theme */
+  background: #3f0101;     /* optional: give footer a background */
+}
+</style>
+
+  <div class='lightbox' id='lightbox'><img alt='' src=''/></div>
+  <script src='script.js'></script>
+
+
+
+
+</body></html>

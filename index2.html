@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Make My Event — Wedding Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== Base / layout ===== */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0; font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial; color:#f7f5ef; background:#4d0e16}
+img{max-width:100%; height:auto; display:block}
+a{text-decoration:none; color:inherit}
+.container{max-width:1120px; margin:0 auto; padding:0 20px}
+
+/* ===== Nav ===== */
+.nav{position:sticky; top:0; z-index:50; backdrop-filter:saturate(120%) blur(10px); background:rgba(32,5,10,.6); border-bottom:1px solid rgba(233,211,165,.2)}
+.nav .inner{display:flex; align-items:center; justify-content:space-between; height:64px}
+.brand{display:flex; gap:12px; align-items:center}
+.links{display:flex; gap:20px; font-weight:600}
+
+/* ===== Hero ===== */
+.hero{position:relative; display:grid; align-items:center; min-height:92vh; overflow:hidden}
+.hero-bg{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0}
+.hero::after{content:""; position:absolute; inset:0; background:rgba(0,0,0,.3); z-index:1}
+.hero .content{position:relative; z-index:2; text-align:center}
+.eyebrow{letter-spacing:.22em; text-transform:uppercase; font-weight:700; opacity:.9; color:#cbbfa5}
+.title{font-family:"Playfair Display",serif; font-size:clamp(28px,5vw,54px); line-height:1.1; margin:.25rem 0 1rem}
+.script{font-family:"Great Vibes",cursive; font-size:clamp(36px,6vw,72px); color:#f1e7c9}
+.stats{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; margin-top:28px}
+.frame{border:1px solid rgba(233,211,165,.35); background:rgba(255,255,255,.05); padding:18px 16px; border-radius:14px}
+.stat .n{font-family:"Playfair Display",serif; font-weight:800; font-size:clamp(26px,4vw,42px); color:#f1e7c9}
+.stat .k{font-weight:600; letter-spacing:.08em; color:#cbbfa5; font-size:.9rem}
+
+/* =======================================================================
+   GLOBAL WALL + SCROLLING LEAVES (APPLIES AFTER HEADER TO ENTIRE PAGE)
+   ======================================================================= */
+.page-wall{position:fixed; inset:0; z-index:0; pointer-events:none}
+.page-wall .wall{position:absolute; inset:0; width:100%; height:100%; object-fit:cover}
+
+/* Leaves fixed at edges; animated with Scroll-linked Animations */
+.leaf{position:fixed; top:0; width:min(34vw, 440px); height:auto; opacity:.95; transform:translateY(0); will-change:transform}
+.leaf-left{ left:0 }
+.leaf-right{ right:0 }
+
+/* Make sure sections sit above the fixed wall */
+#about, #decoration, #segments, #gallery, #team, #testimonials, #contact, footer{position:relative; z-index:1}
+
+/* Hide per-section BGs so the global wall is visible */
+#about .about-bg{ display:none }
+.segments-bg{ display:none }
+.decor-bg{ display:none }  /* keep .decor-ledge if you still want the wooden strip */
+
+/* Scroll-linked animation: down on scroll down, up on scroll up */
+@keyframes scroll-drift { from{transform:translateY(0)} to{transform:translateY(var(--end-shift))} }
+@supports (animation-timeline: scroll(root block)) {
+  .leaf{
+    animation: scroll-drift linear both;
+    animation-timeline: scroll(root block);
+    animation-range: 0% 100%;
+  }
+  .leaf-left  { --end-shift: 1100px; }   /* a bit faster */
+  .leaf-right { --end-shift: 900px; }
+}
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce){ .leaf{ animation:none !important } }
+
+/* ===== About (FIXED collage positions at all sizes) ===== */
+.about-scene{position:relative; padding:0; min-height:100vh; overflow:hidden}
+.about-stage{position:relative; min-height:clamp(680px,95vh,980px); overflow:hidden}
+.frame-img{position:absolute !important; object-fit:cover; filter:drop-shadow(0 24px 40px rgba(0,0,0,.55)); z-index:2}
+
+/* Desktop positions (original layout) */
+@media (min-width:981px){
+  .frame-portrait{
+    left: clamp(24px, 6vw, 72px);
+    top:  clamp(40px, 8vh, 90px);
+    width: clamp(240px, 23vw, 360px);
+    aspect-ratio: 480 / 778;
+  }
+  .frame-top{
+    left: calc(clamp(24px,6vw,72px) + clamp(240px,23vw,360px) + clamp(20px,2vw,28px));
+    top:  clamp(48px, 9vh, 100px);
+    width: clamp(220px, 18vw, 300px);
+    aspect-ratio: 525 / 430;
+  }
+  .frame-bottom{
+    left: calc(clamp(24px,6vw,72px) + clamp(240px,23vw,360px) + clamp(20px,2vw,28px));
+    top:  calc(clamp(48px,9vh,100px) + clamp(220px,18vw,300px) + clamp(22px,2vh,28px));
+    width: clamp(220px, 18vw, 300px);
+    aspect-ratio: 525 / 429;
+  }
+}
+
+/* Tablet: keep composition, scale with vw so it fits */
+@media (max-width:980px){
+  .about-stage{ min-height: 130vw; } /* room for two-right stack */
+  .frame-portrait{ left: 4vw; top: 10vw; width: 42vw; }
+  .frame-top{     left: calc(4vw + 42vw + 2.5vw); top: 10vw; width: 34vw; }
+  .frame-bottom{  left: calc(4vw + 42vw + 2.5vw);
+                  top:  calc(10vw + 34vw + 2.5vw); width: 34vw; }
+}
+
+/* Small phones: same composition, tighter scale */
+@media (max-width:640px){
+  .about-stage{ min-height: 175vw; }
+  .frame-portrait{ left: 4vw; top: 12vw; width: 54vw; }
+  .frame-top{     left: calc(4vw + 54vw + 3vw); top: 12vw; width: 35vw; }
+  .frame-bottom{  left: calc(4vw + 54vw + 3vw);
+                  top:  calc(12vw + 35vw + 3vw); width: 35vw; }
+}
+
+/* Copy block: centered on desktop, stacked below collage on tablet/phone */
+.about-copy{
+  position:absolute; right:clamp(24px,6vw,80px); top:50%; transform:translateY(-50%);
+  width:min(640px,44vw); padding:clamp(18px,2vw,28px);
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(0,0,0,.18));
+  border:1px solid rgba(233,211,165,.65); border-radius:16px; box-shadow:0 14px 50px rgba(0,0,0,.55); color:#f1e7c9; z-index:2;
+}
+.about-copy .quote{margin-top:.8rem; line-height:1.6; font-style:italic}
+@media (max-width:980px){
+  .about-copy{ position:static; transform:none; width:auto; margin:24px 16px }
+}
+
+/* ===== Decoration (uses global wall; keeps ledge) ===== */
+.decor-scene{position:relative; padding:0; overflow:hidden; min-height:clamp(520px,88vh,900px)}
+.decor-stage{position:relative; width:100%; height:100%; min-height:inherit; overflow:hidden}
+.decor-ledge{position:absolute; left:0; right:0; bottom:0; width:100%; max-height:clamp(80px,16vh,180px); object-fit:cover; z-index:1}
+.decor-frames{position:relative; z-index:2; display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(14px,2.5vw,28px); max-width:1600px; margin:0 auto; padding:clamp(24px,5vw,48px); min-height:60vh; align-items:center}
+.decor-frame{width:100%; aspect-ratio:4/5; object-fit:cover; filter:drop-shadow(0 18px 36px rgba(0,0,0,.5)); border-radius:4px}
+@media (max-width:900px){
+  .decor-frames{grid-template-columns:repeat(2,1fr); min-height:56vh}
+  .decor-frame:nth-child(3){grid-column:1/-1; justify-self:center; width:min(520px,90%)}
+}
+@media (max-width:600px){
+  .decor-frames{grid-template-columns:1fr; gap:16px; min-height:auto; padding:18px 16px 120px}
+  .decor-frame{width:92%; margin:0 auto; aspect-ratio:auto}
+  .decor-ledge{max-height:120px}
+}
+
+/* ===== Segments (CSS-only modals) ===== */
+.segments-scene{position:relative; padding:0; overflow:hidden}
+.segments-stage{position:relative; min-height:clamp(640px,92vh,1100px)}
+.segments-container{position:relative; z-index:1; max-width:1200px; margin:0 auto; padding:56px 20px}
+.segments-heading{text-align:center; color:#f1e7c9; margin:0 0 24px; font-family:"Playfair Display",serif}
+.segments-heading span{display:block; font-size:clamp(40px,6vw,72px); letter-spacing:.06em; line-height:1.05}
+.segments-heading::after{content:""; display:block; width:160px; max-width:40%; height:2px; margin:14px auto 6px; background:#f1e7c9; opacity:.6}
+.segments-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(16px,2.5vw,28px); margin-top:clamp(12px,1.5vw,24px)}
+.segment-card{display:block}
+.segment-card-inner{position:relative; aspect-ratio:4/5; display:block; isolation:isolate; filter:drop-shadow(0 16px 36px rgba(0,0,0,.45)); transition:transform .2s ease, filter .2s ease; cursor:zoom-in}
+.segment-arch{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:1; pointer-events:none}
+.segment-content{position:absolute; inset:0; z-index:2; color:#f1e7c9; display:flex; flex-direction:column; justify-content:center; align-items:center; text-align:center; padding:clamp(18px,3.5vw,28px)}
+.seg-title{margin:0 0 .5rem; line-height:1.05; text-transform:uppercase; letter-spacing:.04em; font-size:clamp(26px,3.8vw,40px)}
+.seg-title small{display:block; font-weight:500; letter-spacing:.18em; font-size:clamp(14px,1.6vw,18px)}
+.seg-text{max-width:80%; margin:.5rem auto 0; line-height:1.7; font-size:clamp(13px,1.4vw,16px); color:#f1e7c9}
+@media (hover:hover) and (pointer:fine){
+  .segment-card-inner:hover{transform:translateY(-8px) scale(1.04); filter:drop-shadow(0 26px 48px rgba(0,0,0,.55))}
+}
+@media (max-width:980px){
+  .segments-grid{grid-template-columns:1fr; max-width:720px; margin:0 auto}
+}
+/* Modals */
+.seg-modal{position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.86); padding:20px; z-index:1000; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .2s ease, visibility .2s ease}
+.seg-modal:target{opacity:1; visibility:visible; pointer-events:auto}
+.seg-close{position:absolute; top:18px; right:18px; z-index:1001; text-decoration:none; border:0; border-radius:10px; padding:8px 12px; background:rgba(0,0,0,.55); color:#fff; font-size:30px; line-height:1}
+.seg-modal-card{position:relative; width:min(900px,92vw); aspect-ratio:4/5; display:flex; align-items:center; justify-content:center}
+.seg-modal-arch{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; z-index:0; filter:drop-shadow(0 22px 50px rgba(0,0,0,.6))}
+.seg-modal-content{position:relative; z-index:1; color:#f1e7c9; text-align:center; padding:clamp(18px,3vw,32px)}
+.seg-modal-content .seg-title{font-size:clamp(34px,4.8vw,56px)}
+.seg-modal-content .seg-text{max-width:760px; margin:10px auto 0; font-size:clamp(14px,1.5vw,18px)}
+
+/* ===== Misc sections ===== */
+.section{padding:84px 0}
+.gallery-grid{min-height:200px; border:1px dashed rgba(233,211,165,.25); border-radius:12px}
+.team{display:grid; grid-template-columns:1.2fr 1.8fr; gap:24px}
+.team-grid{min-height:180px; border:1px dashed rgba(233,211,165,.25); border-radius:12px}
+.testi{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.card{border-radius:14px; padding:16px; border:1px solid rgba(233,211,165,.25); background:rgba(255,255,255,.04)}
+.contact{display:grid; grid-template-columns:1.2fr .8fr; gap:20px}
+footer{padding:34px 0; border-top:1px solid rgba(233,211,165,.2); color:#cbbfa5}
+@media (max-width:980px){
+  .team,.contact{grid-template-columns:1fr}
+  .testi{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="container inner">
+      <a class="brand" href="#top">
+        <img src="assets/images/MME logo Png-02.png" alt="Make My Event Logo" style="height:120px; width:auto">
+      </a>
+      <div class="links">
+        <a href="#about">About</a>
+        <a href="#segments">Segments</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#team">Team</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header id="top" class="hero">
+    <img src="assets/images/Header Background-01.jpg" alt="Header Image" class="hero-bg">
+    <div class="container content">
+      <div class="eyebrow">Wedding Profile</div>
+      <h1 class="title">Because your love story deserves a masterpiece.</h1>
+      <div class="script">Make My Event</div>
+      <div class="stats">
+        <div class="stat frame"><div class="n">10+ Years</div><div class="k">Experience</div></div>
+        <div class="stat frame"><div class="n">1200+</div><div class="k">Happy Couples</div></div>
+        <div class="stat frame"><div class="n">30%</div><div class="k">Recurrent Customers</div></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Global red wall + scrolling leaves -->
+  <div class="page-wall" aria-hidden="true">
+    <img class="wall" src="assets/images/BG Red-05.jpg" alt="Deep red wall background">
+    <img class="leaf leaf-left"  src="assets/images/Scroll Down Leaf-03.png" alt="">
+    <img class="leaf leaf-right" src="assets/images/Scroll Down Leaf-04.png" alt="">
+  </div>
+
+  <!-- About (collage fixed) -->
+  <section id="about" class="about-scene">
+    <div class="about-stage">
+      <!-- (hidden via CSS to let global wall show)
+      <img src="assets/images/about-bg.jpg" alt="About Background" class="about-bg"> -->
+      <img class="frame-img frame-portrait" src="assets/images/frame-portrait.jpg" alt="Framed portrait">
+      <img class="frame-img frame-top" src="assets/images/Framed couple top.jpg" alt="Framed couple top">
+      <img class="frame-img frame-bottom" src="assets/images/frame-bottom.jpg" alt="Framed couple bottom">
+      <div class="about-copy">
+        <div class="eyebrow">About Us</div>
+        <h2 class="title">We bring your events to life with creativity & precision.</h2>
+        <p class="quote">MAKE MY EVENT was established in 2015 in Bangladesh with the purpose to bring your events to life with creativity, precision and a passion for excellence. We specialize in designing and executing dynamic experiences — from weddings and corporate events such as product launches and conferences to galas and team-building retreats. Our expert team handles every detail, blending innovative concepts with seamless logistics to deliver inspiring and connecting events. With a client-first approach and flawless execution, we transform ideas into unforgettable events. Trusted by fortune 1000+ clients across Bangladesh, we help businesses make a bold statement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Decoration (uses global wall; keeps wooden ledge) -->
+  <section id="decoration" class="decor-scene">
+    <div class="decor-stage">
+      <!-- <img class="decor-bg" src="assets/images/decor-wall.jpg" alt="">  (hidden) -->
+      <img class="decor-ledge" src="assets/images/decor-ledge.jpg" alt="Wooden base">
+      <div class="decor-frames">
+        <img class="decor-frame" src="assets/images/frame-left.jpg"   alt="Framed photo left">
+        <img class="decor-frame" src="assets/images/frame-center.jpg" alt="Framed photo center">
+        <img class="decor-frame" src="assets/images/frame-right.jpg"  alt="Framed photo right">
+      </div>
+    </div>
+  </section>
+
+  <!-- Segments -->
+  <section id="segments" class="segments-scene">
+    <div class="segments-stage">
+      <!-- <img class="segments-bg" src="assets/images/segments-bg.jpg" alt=""> (hidden) -->
+      <div class="segments-container">
+        <h2 class="segments-heading"><span>OUR</span><span>SEGMENTS</span></h2>
+        <div class="segments-grid">
+          <a href="#seg-classic" class="segment-card">
+            <div class="segment-card-inner">
+              <img src="assets/images/segments-arch.png" class="segment-arch" alt="">
+              <div class="segment-content">
+                <h3 class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
+                <p class="seg-text"><strong>Traditional yet graceful,</strong> this package covers all the essential décor elements to make your wedding simple, beautiful, and memorable without compromise.</p>
+              </div>
+            </div>
+          </a>
+          <a href="#seg-premium" class="segment-card">
+            <div class="segment-card-inner">
+              <img src="assets/images/segments-arch.png" class="segment-arch" alt="">
+              <div class="segment-content">
+                <h3 class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
+                <p class="seg-text"><strong>A touch of royal sophistication —</strong> designed for couples who want refined elegance, stylish details, and a charming ambience that leaves a lasting impression.</p>
+              </div>
+            </div>
+          </a>
+          <a href="#seg-signature" class="segment-card">
+            <div class="segment-card-inner">
+              <img src="assets/images/segments-arch.png" class="segment-arch" alt="">
+              <div class="segment-content">
+                <h3 class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
+                <p class="seg-text"><strong>The ultimate grandeur experience —</strong> a lavish, bespoke décor journey where every detail is tailored to perfection, creating a truly unforgettable celebration.</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CSS-only modals for Segments -->
+  <div id="seg-classic" class="seg-modal" aria-hidden="true">
+    <a href="#segments" class="seg-close" aria-label="Close">×</a>
+    <div class="seg-modal-card">
+      <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="">
+      <div class="seg-modal-content">
+        <h3 class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
+        <p class="seg-text"><strong>Traditional yet graceful,</strong> this package covers all the essential décor elements to make your wedding simple, beautiful, and memorable without compromise.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="seg-premium" class="seg-modal" aria-hidden="true">
+    <a href="#segments" class="seg-close" aria-label="Close">×</a>
+    <div class="seg-modal-card">
+      <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="">
+      <div class="seg-modal-content">
+        <h3 class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
+        <p class="seg-text"><strong>A touch of royal sophistication —</strong> designed for couples who want refined elegance, stylish details, and a charming ambience that leaves a lasting impression.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="seg-signature" class="seg-modal" aria-hidden="true">
+    <a href="#segments" class="seg-close" aria-label="Close">×</a>
+    <div class="seg-modal-card">
+      <img class="seg-modal-arch" src="assets/images/segments-arch.png" alt="">
+      <div class="seg-modal-content">
+        <h3 class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
+        <p class="seg-text"><strong>The ultimate grandeur experience —</strong> a lavish, bespoke décor journey where every detail is tailored to perfection, creating a truly unforgettable celebration.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Other sections (minimal) -->
+  <section id="gallery" class="section">
+    <div class="container">
+      <div class="eyebrow">Our Gallery</div>
+      <h2 class="title">Crafting Experiences</h2>
+      <div class="gallery-grid"></div>
+    </div>
+  </section>
+
+  <section id="team" class="section">
+    <div class="container team">
+      <div class="frame" style="padding:26px; border-radius:18px">
+        <div class="eyebrow">Our Team</div>
+        <h2 class="title">The people behind the scenes</h2>
+      </div>
+      <div class="team-grid"></div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section">
+    <div class="container">
+      <div class="eyebrow">Some Testimonials</div>
+      <h2 class="title">What our clients say</h2>
+      <div class="testi">
+        <div class="card"><p>“Their attention to detail was impeccable...”</p></div>
+        <div class="card"><p>“If you're looking for someone who can turn your ideas into reality...”</p></div>
+        <div class="card"><p>“They did such an amazing job...”</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container contact">
+      <div class="frame" style="padding:24px; border-radius:16px">
+        <div class="eyebrow">Contact</div>
+        <h2 class="title">Let’s make your event unforgettable</h2>
+        <div class="item"><span>📍</span><div>94 Road No. 2, Block A, Niketon, Gulshan, Dhaka 1212</div></div>
+      </div>
+      <form class="frame" style="padding:24px; border-radius:16px"></form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">© <span id="y"></span> Make My Event. All rights reserved.</div>
+  </footer>
+</body>
+</html>

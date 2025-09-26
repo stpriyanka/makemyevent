@@ -27,8 +27,8 @@ if ($_POST && isset($_POST['update_content'])) {
         $content = $_POST['content'];
         $updated_by = $_SESSION['username'];
         
-        $query = "INSERT INTO content_sections (section_name, content, updated_by) VALUES (?, ?, ?) 
-                 ON DUPLICATE KEY UPDATE content = VALUES(content), updated_by = VALUES(updated_by)";
+        // Use SQLite compatible upsert syntax
+        $query = "INSERT OR REPLACE INTO content_sections (section_name, content, updated_by, updated_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
         $stmt = $conn->prepare($query);
         $stmt->execute([$section, json_encode($content), $updated_by]);
         

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Login Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 20px auto; padding: 20px; }
+        .form-container { background: #f5f5f5; padding: 20px; border-radius: 10px; margin: 20px 0; }
+        input, button { padding: 10px; margin: 5px; width: 200px; }
+        button { background: #c41e3a; color: white; border: none; cursor: pointer; }
+        button:hover { background: #a01729; }
+        .result { background: #e8f5e8; padding: 10px; margin: 10px 0; border-radius: 5px; }
+        .error { background: #ffeee8; color: #c41e3a; }
+    </style>
+</head>
+<body>
+    <h1>Direct Login Test</h1>
+    
+    <div class="form-container">
+        <h2>Manual Login Form</h2>
+        <form action="login.php" method="POST">
+            <div>
+                <input type="text" name="username" placeholder="Username (admin)" value="admin" required>
+            </div>
+            <div>
+                <input type="password" name="password" placeholder="Password (admin123)" value="admin123" required>
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+    </div>
+    
+    <div class="form-container">
+        <h2>JavaScript Login Test</h2>
+        <button onclick="testLogin()">Test Login with JavaScript</button>
+        <div id="result"></div>
+    </div>
+    
+    <div class="form-container">
+        <h2>Quick Links</h2>
+        <p><a href="login.php">🔐 Login Page</a></p>
+        <p><a href="admin/dashboard.php">🏠 Admin Dashboard</a></p>
+        <p><a href="admin/edit-section.php?section=hero">✏️ Edit Hero Section</a></p>
+        <p><a href="index-cms.html">🌐 CMS Website</a></p>
+        <p><a href="workflow-test.php">🧪 Workflow Test</a></p>
+    </div>
+    
+    <script>
+        function testLogin() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Testing login...';
+            
+            const formData = new FormData();
+            formData.append('username', 'admin');
+            formData.append('password', 'admin123');
+            
+            fetch('login.php', {
+                method: 'POST',
+                body: formData,
+                credentials: 'include'
+            })
+            .then(response => {
+                if (response.redirected) {
+                    resultDiv.innerHTML = '<div class="result">✅ Login successful - Redirected to: ' + response.url + '</div>';
+                    return response.text();
+                } else {
+                    return response.text().then(text => {
+                        if (text.includes('Invalid username or password')) {
+                            throw new Error('Login failed');
+                        }
+                        return text;
+                    });
+                }
+            })
+            .then(html => {
+                console.log('Login response:', html);
+                // Test if we can access admin dashboard
+                return fetch('admin/dashboard.php', {
+                    credentials: 'include'
+                });
+            })
+            .then(response => {
+                if (response.ok) {
+                    resultDiv.innerHTML += '<div class="result">✅ Admin dashboard accessible</div>';
+                } else {
+                    resultDiv.innerHTML += '<div class="error">❌ Admin dashboard not accessible</div>';
+                }
+            })
+            .catch(error => {
+                resultDiv.innerHTML = '<div class="error">❌ Login failed: ' + error.message + '</div>';
+            });
+        }
+    </script>
+</body>
+</html>

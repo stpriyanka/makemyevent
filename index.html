@@ -76,13 +76,13 @@
 
     <!-- Title block inside moulding -->
     <div class="title-slot">
-      <div class="eyebrow">Wedding Profile</div>
-      <h1 class="title">Because your love story deserves a masterpiece.</h1>
-      <div class="script">MAKE MY EVENT</div>
+      <div class="eyebrow" id="heroEyebrow">Wedding Profile</div>
+      <h1 class="title" id="heroTitle">Because your love story deserves a masterpiece.</h1>
+      <div class="script" id="heroScript">MAKE MY EVENT</div>
     </div>
 
     <!-- Stats aligned to plaques -->
-    <div class="stats-slot">
+    <div class="stats-slot" id="heroStats">
       <div class="stat">
         <div class="n">10+ Years</div>
         <div class="k">Experience</div>
@@ -414,9 +414,9 @@
 
     <!-- Text Content -->
     <div class="about-copy">
-      <div class="eyebrow">About Us</div>
-      <h2 class="title">We bring your events to life with creativity & precision.</h2>
-      <p class="quote">
+      <div class="eyebrow" id="aboutEyebrow">About Us</div>
+      <h2 class="title" id="aboutTitle">We bring your events to life with creativity & precision.</h2>
+      <p class="quote" id="aboutDescription">
         Make My Event was established in 2015 in Bangladesh with the purpose to bring your events to life with creativity,
         precision and a passion for excellence. We specialize in designing and executing dynamic experiences — from
         weddings and corporate events such as product launches and conferences to galas and team-building retreats.
@@ -1867,7 +1867,50 @@ footer {
   <div class='lightbox' id='lightbox'><img alt='' src=''/></div>
   <script src='script.js'></script>
 
+  <script>
+    // Load dynamic content from database
+    async function loadContent() {
+      try {
+        const response = await fetch('api/content.php');
+        const data = await response.json();
+        
+        // Update hero section
+        if (data.hero) {
+          const hero = data.hero; // Already parsed by API
+          document.getElementById('heroEyebrow').textContent = hero.eyebrow || '';
+          document.getElementById('heroTitle').textContent = hero.title || '';
+          document.getElementById('heroScript').textContent = hero.script || '';
+          
+          // Update stats if they exist
+          if (hero.stats) {
+            document.getElementById('heroStats').innerHTML = hero.stats.map(stat => `
+              <div class="stat">
+                <div class="n">${stat.number}</div>
+                <div class="k">${stat.label}</div>
+              </div>
+            `).join('');
+          }
+        }
+        
+        // Update about section
+        if (data.about) {
+          const about = data.about; // Already parsed by API
+          document.getElementById('aboutEyebrow').textContent = about.eyebrow || '';
+          document.getElementById('aboutTitle').textContent = about.title || '';
+          document.getElementById('aboutDescription').textContent = about.description || '';
+        }
 
+        console.log('Content loaded successfully from database');
+      } catch (error) {
+        console.error('Error loading content:', error);
+        console.log('Using fallback static content');
+      }
+    }
 
+    // Load content when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadContent();
+    });
+  </script>
 
 </body></html>

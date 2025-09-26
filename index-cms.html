@@ -84,6 +84,23 @@
     .editable-section {
       position: relative;
     }
+    
+    .admin-access-btn {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+      color: white !important;
+      padding: 0.5rem 1rem !important;
+      border-radius: 20px !important;
+      font-weight: 600 !important;
+      text-decoration: none !important;
+      font-size: 0.9rem !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3) !important;
+    }
+    
+    .admin-access-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4) !important;
+    }
   </style>
 </head>
 <body>
@@ -112,6 +129,7 @@
         <a href="#team">Team</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact</a>
+        <a href="#" onclick="adminAccess()" class="admin-access-btn" id="adminAccessBtn">🔧 Admin</a>
       </div>
     </div>
   </nav>
@@ -269,18 +287,38 @@
           document.body.classList.add('admin-logged-in');
           document.getElementById('adminBar').classList.add('visible');
           document.getElementById('adminUser').textContent = `${data.name} (${data.role})`;
+          
+          // Update admin access button
+          const adminAccessBtn = document.getElementById('adminAccessBtn');
+          if (adminAccessBtn) adminAccessBtn.innerHTML = '🏠 Dashboard';
+        } else {
+          // Update admin access button for logged out state
+          const adminAccessBtn = document.getElementById('adminAccessBtn');
+          if (adminAccessBtn) adminAccessBtn.innerHTML = '🔧 Admin Login';
         }
       } catch (error) {
         console.log('Not logged in as admin');
+        // Update admin access button for error state  
+        const adminAccessBtn = document.getElementById('adminAccessBtn');
+        if (adminAccessBtn) adminAccessBtn.innerHTML = '🔧 Admin Login';
       }
     }
 
     // Edit section function
     function editSection(section) {
       if (isAdminLoggedIn) {
-        window.open(`admin/edit-section.php?section=${section}`, '_blank');
+        window.location.href = `admin/edit-section.php?section=${section}`;
       } else {
-        window.open('login.php', '_blank');
+        window.location.href = 'login.php';
+      }
+    }
+    
+    // Admin access function
+    function adminAccess() {
+      if (isAdminLoggedIn) {
+        window.location.href = 'admin/dashboard.php';
+      } else {
+        window.location.href = 'login.php';
       }
     }
 

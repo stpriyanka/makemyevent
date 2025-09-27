@@ -36,13 +36,51 @@ if ($_POST && isset($_POST['update_content'])) {
                     $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
                     
                     if (in_array($file_extension, $allowed_extensions)) {
-                        // Generate unique filename
-                        $new_filename = $section . '_' . $field_name . '_' . time() . '.' . $file_extension;
-                        $upload_path = $upload_dir . $new_filename;
-                        
-                        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
-                            // Store relative path in content
-                            $content[$field_name] = 'assets/images/' . $new_filename;
+                        // Handle gallery album uploads
+                        if (strpos($field_name, 'album_') === 0) {
+                            // Parse album upload format: album_X_cover or album_X_img_Y
+                            if (preg_match('/^album_(\d+)_cover$/', $field_name, $matches)) {
+                                // Album cover upload
+                                $album_index = $matches[1];
+                                $new_filename = 'album' . ($album_index + 1) . '_cover_' . time() . '.' . $file_extension;
+                                $upload_path = $upload_dir . $new_filename;
+                                
+                                if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+                                    $content['albums'][$album_index]['cover'] = 'assets/images/' . $new_filename;
+                                }
+                            } elseif (preg_match('/^album_(\d+)_img_(\d+)$/', $field_name, $matches)) {
+                                // Album image upload
+                                $album_index = $matches[1];
+                                $img_index = $matches[2];
+                                $base_filename = 'album' . ($album_index + 1) . '_img' . ($img_index + 1) . '_' . time();
+                                
+                                // Create large version
+                                $large_filename = $base_filename . '-large.' . $file_extension;
+                                $large_path = $upload_dir . $large_filename;
+                                
+                                if (move_uploaded_file($file['tmp_name'], $large_path)) {
+                                    // Create thumbnail version
+                                    $thumb_filename = $base_filename . '-thumb.' . $file_extension;
+                                    $thumb_path = $upload_dir . $thumb_filename;
+                                    
+                                    // Simple thumbnail creation (copy for now, can enhance with actual resizing)
+                                    if (copy($large_path, $thumb_path)) {
+                                        $content['albums'][$album_index]['images'][$img_index] = [
+                                            'large' => 'assets/images/' . $large_filename,
+                                            'thumb' => 'assets/images/' . $thumb_filename
+                                        ];
+                                    }
+                                }
+                            }
+                        } else {
+                            // Regular file upload (non-gallery)
+                            $new_filename = $section . '_' . $field_name . '_' . time() . '.' . $file_extension;
+                            $upload_path = $upload_dir . $new_filename;
+                            
+                            if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+                                // Store relative path in content
+                                $content[$field_name] = 'assets/images/' . $new_filename;
+                            }
                         }
                     }
                 }
@@ -582,10 +620,197 @@ $config = $section_configs[$section];
                             </div>
                         
                         <?php elseif ($field_config['type'] === 'gallery'): ?>
-                            <div class="gallery-container">
-                                <p>Gallery management coming soon...</p>
-                                <input type="hidden" name="content[<?php echo $field_name; ?>]" 
-                                       value="<?php echo htmlspecialchars(json_encode($current_content[$field_name] ?? [])); ?>">
+                            <div class="gallery-container" id="gallery-manager">
+                                <?php 
+                                $albums = $current_content[$field_name] ?? [];
+                                if (empty($albums)) {
+                                    // Default album structure based on current HTML
+                                    $albums = [
+                                        ['title' => "Asif Bahar's Haldi Ceremony", 'cover' => 'assets/images/album1/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Chandrima's Reception Ceremony", 'cover' => 'assets/images/album2/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Nibir's Reception Ceremony", 'cover' => 'assets/images/album3/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Methila's Photoshoot", 'cover' => 'assets/images/album4/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Yamin's Reception", 'cover' => 'assets/images/album5/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Afroza's Haldi Night", 'cover' => 'assets/images/album6/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Angel's Reception Ceremony", 'cover' => 'assets/images/album7/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Badhon's Haldi Night", 'cover' => 'assets/images/album8/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Imtiaz & Rosan's Reception", 'cover' => 'assets/images/album9/cover-thumb.jpg', 'images' => []],
+                                        ['title' => "Album 10", 'cover' => 'assets/images/album10/cover-thumb.jpg', 'images' => []]
+                                    ];
+                                }
+                                ?>
+                                
+                                <div class="albums-grid">
+                                    <?php foreach ($albums as $index => $album): ?>
+                                        <div class="album-item" data-album-index="<?php echo $index; ?>">
+                                            <div class="album-header">
+                                                <h4>Album <?php echo $index + 1; ?></h4>
+                                                <button type="button" class="toggle-album">▼</button>
+                                            </div>
+                                            
+                                            <div class="album-content">
+                                                <!-- Album Title -->
+                                                <div class="form-group">
+                                                    <label>Album Title</label>
+                                                    <input type="text" 
+                                                           name="content[<?php echo $field_name; ?>][<?php echo $index; ?>][title]" 
+                                                           value="<?php echo htmlspecialchars($album['title'] ?? ''); ?>"
+                                                           placeholder="Enter album title">
+                                                </div>
+                                                
+                                                <!-- Cover Image -->
+                                                <div class="form-group">
+                                                    <label>Cover Image</label>
+                                                    <div class="file-upload-container">
+                                                        <?php if (!empty($album['cover'])): ?>
+                                                            <div class="current-file">
+                                                                <img src="../<?php echo htmlspecialchars($album['cover']); ?>" 
+                                                                     alt="Album cover" style="max-width: 150px; height: auto; margin: 10px 0;">
+                                                                <input type="hidden" 
+                                                                       name="content[<?php echo $field_name; ?>][<?php echo $index; ?>][cover]" 
+                                                                       value="<?php echo htmlspecialchars($album['cover'] ?? ''); ?>">
+                                                            </div>
+                                                        <?php endif; ?>
+                                                        <input type="file" 
+                                                               name="album_<?php echo $index; ?>_cover" 
+                                                               accept="image/*" class="file-input">
+                                                    </div>
+                                                </div>
+                                                
+                                                <!-- Album Images -->
+                                                <div class="form-group">
+                                                    <label>Album Images (Individual uploads)</label>
+                                                    <div class="album-images">
+                                                        <?php 
+                                                        $albumImages = $album['images'] ?? [];
+                                                        // Show up to 10 image slots
+                                                        for ($imgIndex = 0; $imgIndex < 10; $imgIndex++): 
+                                                            $image = $albumImages[$imgIndex] ?? null;
+                                                        ?>
+                                                            <div class="image-slot">
+                                                                <label>Image <?php echo $imgIndex + 1; ?></label>
+                                                                <?php if ($image && isset($image['large'])): ?>
+                                                                    <div class="current-image">
+                                                                        <img src="../<?php echo htmlspecialchars($image['thumb'] ?? $image['large']); ?>" 
+                                                                             alt="Album image" style="max-width: 100px; height: auto;">
+                                                                        <input type="hidden" 
+                                                                               name="content[<?php echo $field_name; ?>][<?php echo $index; ?>][images][<?php echo $imgIndex; ?>][large]" 
+                                                                               value="<?php echo htmlspecialchars($image['large'] ?? ''); ?>">
+                                                                        <input type="hidden" 
+                                                                               name="content[<?php echo $field_name; ?>][<?php echo $index; ?>][images][<?php echo $imgIndex; ?>][thumb]" 
+                                                                               value="<?php echo htmlspecialchars($image['thumb'] ?? ''); ?>">
+                                                                    </div>
+                                                                <?php endif; ?>
+                                                                <input type="file" 
+                                                                       name="album_<?php echo $index; ?>_img_<?php echo $imgIndex; ?>" 
+                                                                       accept="image/*" class="file-input-small">
+                                                            </div>
+                                                        <?php endfor; ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+                                
+                                <style>
+                                .albums-grid {
+                                    display: grid;
+                                    gap: 1rem;
+                                }
+                                
+                                .album-item {
+                                    border: 2px solid #e0e0e0;
+                                    border-radius: 8px;
+                                    overflow: hidden;
+                                }
+                                
+                                .album-header {
+                                    display: flex;
+                                    justify-content: space-between;
+                                    align-items: center;
+                                    background: #f8f9fa;
+                                    padding: 1rem;
+                                    border-bottom: 1px solid #e0e0e0;
+                                    cursor: pointer;
+                                }
+                                
+                                .album-header h4 {
+                                    margin: 0;
+                                    color: #4d0e16;
+                                }
+                                
+                                .toggle-album {
+                                    background: none;
+                                    border: none;
+                                    font-size: 1.2rem;
+                                    cursor: pointer;
+                                    transition: transform 0.3s ease;
+                                }
+                                
+                                .album-item.collapsed .toggle-album {
+                                    transform: rotate(-90deg);
+                                }
+                                
+                                .album-content {
+                                    padding: 1rem;
+                                    display: block;
+                                }
+                                
+                                .album-item.collapsed .album-content {
+                                    display: none;
+                                }
+                                
+                                .album-images {
+                                    display: grid;
+                                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                                    gap: 1rem;
+                                    margin-top: 0.5rem;
+                                }
+                                
+                                .image-slot {
+                                    border: 1px dashed #ccc;
+                                    padding: 1rem;
+                                    border-radius: 6px;
+                                    text-align: center;
+                                }
+                                
+                                .image-slot label {
+                                    font-size: 0.9rem;
+                                    font-weight: 600;
+                                    color: #666;
+                                    margin-bottom: 0.5rem;
+                                    display: block;
+                                }
+                                
+                                .current-image {
+                                    margin-bottom: 0.5rem;
+                                }
+                                
+                                .file-input-small {
+                                    font-size: 0.8rem;
+                                    padding: 0.3rem;
+                                }
+                                </style>
+                                
+                                <script>
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    // Toggle album sections
+                                    document.querySelectorAll('.album-header').forEach(header => {
+                                        header.addEventListener('click', function() {
+                                            const albumItem = this.closest('.album-item');
+                                            albumItem.classList.toggle('collapsed');
+                                        });
+                                    });
+                                    
+                                    // Initially collapse all albums except first one
+                                    document.querySelectorAll('.album-item').forEach((item, index) => {
+                                        if (index > 0) {
+                                            item.classList.add('collapsed');
+                                        }
+                                    });
+                                });
+                                </script>
                             </div>
                         <?php endif; ?>
                     </div>

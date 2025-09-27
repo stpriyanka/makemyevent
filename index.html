@@ -2050,13 +2050,50 @@ footer {
         // Update gallery section
         if (data.gallery) {
           const gallery = data.gallery;
-          const galleryElements = ['galleryTitle', 'galleryDescription'];
-          galleryElements.forEach(elementId => {
-            const element = document.getElementById(elementId);
-            if (element && gallery[elementId]) {
-              element.textContent = gallery[elementId];
+          
+          // Update title and description
+          const galleryTitle = document.getElementById('galleryTitle');
+          const galleryDescription = document.getElementById('galleryDescription');
+          
+          if (galleryTitle && gallery.title) {
+            galleryTitle.textContent = gallery.title;
+          }
+          
+          if (galleryDescription && gallery.description) {
+            galleryDescription.textContent = gallery.description;
+          }
+          
+          // Update background image
+          if (gallery.background_image) {
+            const galleryBg = document.querySelector('.gallery-bg');
+            if (galleryBg) {
+              galleryBg.src = gallery.background_image;
             }
-          });
+          }
+          
+          // Update albums dynamically
+          if (gallery.albums && gallery.albums.length > 0) {
+            const lightgallery = document.getElementById('lightgallery');
+            if (lightgallery) {
+              lightgallery.innerHTML = gallery.albums.map(album => {
+                const albumDataAttribute = JSON.stringify(album.images || []).replace(/"/g, '&quot;');
+                return `
+                  <a href="#" class="album" data-album="${albumDataAttribute}">
+                    <img src="${album.cover || ''}" alt="${album.title || 'Album'} cover">
+                    <span class="album-title">${album.title || 'Untitled Album'}</span>
+                  </a>
+                `;
+              }).join('');
+              
+              // Reinitialize LightGallery if it exists
+              if (window.lightGallery && lightgallery.lgData) {
+                lightgallery.lgData.destroy();
+              }
+              
+              // Initialize gallery functionality (if available)
+              initializeGalleryEvents();
+            }
+          }
         }
 
         // Update decoration section (frame images only)

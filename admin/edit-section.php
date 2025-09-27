@@ -24,7 +24,23 @@ if (!in_array($section, $valid_sections)) {
 // Handle form submission
 if ($_POST && isset($_POST['update_content'])) {
     try {
-        $content = $_POST['content'];
+        // Start with existing database content to preserve unchanged fields
+        $query = "SELECT content FROM content_sections WHERE section_name = ?";
+        $stmt = $conn->prepare($query);
+        $stmt->execute([$section]);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        $content = $result ? json_decode($result['content'], true) : [];
+        
+        // Ensure $content is always an array
+        if (!is_array($content)) {
+            $content = [];
+        }
+        
+        // Overlay form updates (if any)
+        if (isset($_POST['content']) && is_array($_POST['content'])) {
+            $content = array_merge($content, $_POST['content']);
+        }
+        
         $updated_by = $_SESSION['username'];
         
         // Handle file uploads

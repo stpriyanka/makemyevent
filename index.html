@@ -1876,7 +1876,9 @@ footer {
     // Load dynamic content from database
     async function loadContent() {
       try {
-        const response = await fetch('api/content.php');
+        // Add cache busting to ensure fresh data
+        const cacheBuster = '?t=' + new Date().getTime();
+        const response = await fetch('api/content.php' + cacheBuster);
         const data = await response.json();
         
         // Update hero section
@@ -2100,21 +2102,24 @@ footer {
         if (data.decoration) {
           const decoration = data.decoration;
           
-          // Update frame images
+          // Update frame images with cache busting
           const frameLeft = document.getElementById('frame-left');
           const frameCenter = document.getElementById('frame-center');
           const frameRight = document.getElementById('frame-right');
           
+          // Add cache busting to force image reload
+          const cacheBuster = '?v=' + new Date().getTime();
+          
           if (frameLeft && decoration.frame_left) {
-            frameLeft.src = decoration.frame_left;
+            frameLeft.src = decoration.frame_left + cacheBuster;
           }
           
           if (frameCenter && decoration.frame_center) {
-            frameCenter.src = decoration.frame_center;
+            frameCenter.src = decoration.frame_center + cacheBuster;
           }
           
           if (frameRight && decoration.frame_right) {
-            frameRight.src = decoration.frame_right;
+            frameRight.src = decoration.frame_right + cacheBuster;
           }
         }
 

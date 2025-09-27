@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Decoration Frames</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .frame { max-width: 200px; margin: 10px; border: 1px solid #ccc; }
+        .debug-info { background: #f5f5f5; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; margin: 10px 0; background: #007cba; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <h1>Debug Decoration Frame Loading</h1>
+    
+    <div class="debug-info">
+        <h3>API Data:</h3>
+        <div id="api-data">Loading...</div>
+    </div>
+    
+    <div class="debug-info">
+        <h3>Frame Elements:</h3>
+        <div>
+            <img id="frame-left" src="assets/images/frame-left.jpg" alt="Left Frame" class="frame" />
+            <img id="frame-center" src="assets/images/frame-center.jpg" alt="Center Frame" class="frame" />
+            <img id="frame-right" src="assets/images/frame-right.jpg" alt="Right Frame" class="frame" />
+        </div>
+    </div>
+    
+    <button onclick="loadDecoration()">Load Decoration Data</button>
+    <button onclick="updateFrames()">Update Frame Images</button>
+    
+    <div class="debug-info">
+        <h3>Debug Log:</h3>
+        <pre id="debug-log"></pre>
+    </div>
+
+    <script>
+        function log(message) {
+            const debugLog = document.getElementById('debug-log');
+            debugLog.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+            console.log(message);
+        }
+
+        let decorationData = null;
+
+        async function loadDecoration() {
+            try {
+                log('Fetching decoration data from API...');
+                const response = await fetch('/api/content.php?t=' + new Date().getTime());
+                const data = await response.json();
+                decorationData = data.decoration;
+                
+                document.getElementById('api-data').innerHTML = '<pre>' + JSON.stringify(decorationData, null, 2) + '</pre>';
+                log('API data loaded successfully');
+                log('Decoration data: ' + JSON.stringify(decorationData));
+            } catch (error) {
+                log('Error loading API data: ' + error.message);
+            }
+        }
+
+        function updateFrames() {
+            if (!decorationData) {
+                log('No decoration data available. Load API data first.');
+                return;
+            }
+
+            const frameLeft = document.getElementById('frame-left');
+            const frameCenter = document.getElementById('frame-center');
+            const frameRight = document.getElementById('frame-right');
+
+            log('Current frame sources:');
+            log('  Left: ' + frameLeft.src);
+            log('  Center: ' + frameCenter.src);
+            log('  Right: ' + frameRight.src);
+
+            const cacheBuster = '?v=' + new Date().getTime();
+
+            if (frameLeft && decorationData.frame_left) {
+                const newSrc = decorationData.frame_left + cacheBuster;
+                log('Updating frame-left to: ' + newSrc);
+                frameLeft.src = newSrc;
+            }
+
+            if (frameCenter && decorationData.frame_center) {
+                const newSrc = decorationData.frame_center + cacheBuster;
+                log('Updating frame-center to: ' + newSrc);
+                frameCenter.src = newSrc;
+            }
+
+            if (frameRight && decorationData.frame_right) {
+                const newSrc = decorationData.frame_right + cacheBuster;
+                log('Updating frame-right to: ' + newSrc);
+                frameRight.src = newSrc;
+            }
+
+            log('Frame update complete');
+        }
+
+        // Load data on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            log('Page loaded, fetching initial data...');
+            loadDecoration();
+        });
+    </script>
+</body>
+</html>

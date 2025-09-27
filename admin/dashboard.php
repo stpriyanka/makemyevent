@@ -333,14 +333,11 @@ $conn = $db->getConnection();
         <div class="quick-actions">
             <h3>Quick Actions</h3>
             <div class="action-buttons">
+                <a href="../index-cms.html" class="action-btn">
+                    � Back to CMS Site
+                </a>
                 <a href="../index.html" class="action-btn" target="_blank">
                     👁️ Preview Website
-                </a>
-                <a href="backup-content.php" class="action-btn">
-                    💾 Backup Content
-                </a>
-                <a href="site-settings.php" class="action-btn">
-                    ⚙️ Site Settings
                 </a>
             </div>
         </div>

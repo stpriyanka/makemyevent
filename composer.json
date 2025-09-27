@@ -1,0 +1,11 @@
+{
+  "name": "makemyevent/wedding-cms",
+  "description": "Premium wedding event planning website with CMS",
+  "version": "1.0.0",
+  "engines": {
+    "php": "^8.0"
+  },
+  "scripts": {
+    "start": "php -S 0.0.0.0:$PORT"
+  }
+}

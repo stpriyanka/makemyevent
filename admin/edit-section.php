@@ -14,7 +14,7 @@ $conn = $db->getConnection();
 
 // Get section parameter
 $section = $_GET['section'] ?? '';
-$valid_sections = ['hero', 'about', 'segments', 'team', 'testimonials', 'contact', 'gallery', 'decoration', 'navigation', 'footer'];
+$valid_sections = ['hero', 'about', 'trusted-scene', 'segments', 'team', 'testimonials', 'contact', 'gallery', 'decoration', 'navigation', 'footer'];
 
 if (!in_array($section, $valid_sections)) {
     header('Location: dashboard.php');
@@ -99,12 +99,12 @@ $section_configs = [
     ],
     'trusted-scene' => [
         'title' => 'Trusted Scene',
-        'description' => 'Customer feedback and trust indicators',
+        'description' => 'Customer feedback and trust indicators - Only badge image and first text block are editable',
         'fields' => [
             'badge_image' => ['label' => 'Badge Image', 'type' => 'file'],
             'line_1' => ['label' => 'First Text Block', 'type' => 'textarea'],
-            'line_2' => ['label' => 'Brand Name Text', 'type' => 'text'],
-            'background_image' => ['label' => 'Background Image', 'type' => 'file']
+            'line_2' => ['label' => 'Brand Name Text', 'type' => 'readonly'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'readonly']
         ]
     ],
     'segments' => [

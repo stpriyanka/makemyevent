@@ -570,6 +570,10 @@
 <!-- DECORATION SECTION -->
 <section id="decoration" class="decor-scene">
   <div class="decor-stage">
+    <!-- Hidden elements for dynamic content -->
+    <div id="decorationTitle" style="display: none;"></div>
+    <div id="decorationDescription" style="display: none;"></div>
+    
     <!-- Background wall -->
     <img src="assets/images/decor-wall.jpg" alt="Red wall background" class="decor-bg" />
 
@@ -722,8 +726,8 @@
 
     <div class="segments-container">
       <h2 class="segments-heading">
-        <span>OUR</span>
-        <span>SEGMENTS</span>
+        <span id="segmentsTitle">OUR</span>
+        <span id="segmentsDescription">SEGMENTS</span>
       </h2>
 
       <div class="segments-grid">
@@ -892,8 +896,8 @@
   <div class="segments-container"><!-- reuse same container spacing -->
     <!-- Match OUR SEGMENTS heading style -->
     <h2 class="segments-heading">
-      <span>OUR</span>
-      <span>GALLERY</span>
+      <span id="galleryTitle">OUR</span>
+      <span id="galleryDescription">GALLERY</span>
     </h2>
 
     <div id="lightgallery" class="gallery-grid">
@@ -1300,9 +1304,10 @@ document.addEventListener('DOMContentLoaded', function () {
 <section id="team" class="section team-scene">
   <div class="segments-container">
       <h2 class="segments-heading">
-        <span>OUR TEAM</span>
+        <span id="teamTitle">OUR TEAM</span>
         
       </h2>
+      <p id="teamDescription" style="display: none;"></p>
 
     <div class="team-layout">
       <!-- Left: Lead portrait (large) -->
@@ -1524,8 +1529,8 @@ figcaption{ text-align:center; margin-top:10px; }
  <section id="testimonials" class="section testimonials">
   <div class="segments-container"> 
     <h2 class="segments-heading">
-      <span>OUR</span>
-      <span>TESTIMONIALS</span>
+      <span id="testimonialsTitle">OUR</span>
+      <span id="testimonialsDescription">TESTIMONIALS</span>
     </h2>
   </div>
 
@@ -1723,8 +1728,8 @@ html, body { margin: 0; }
 
     <!-- Contact Info -->
     <div class="frame contact-card">
-      <div class="eyebrow">Contact</div>
-      <h2 class="title">Let’s make your event unforgettable</h2>
+      <div class="eyebrow" id="contactTitle">Contact</div>
+      <h2 class="title" id="contactDescription">Let’s make your event unforgettable</h2>
 
       <!-- Address -->
       <div class="item">
@@ -1898,6 +1903,82 @@ footer {
           document.getElementById('aboutEyebrow').textContent = about.eyebrow || '';
           document.getElementById('aboutTitle').textContent = about.title || '';
           document.getElementById('aboutDescription').textContent = about.description || '';
+        }
+
+        // Update segments section
+        if (data.segments) {
+          const segments = data.segments;
+          // Update segments content if IDs exist
+          const segmentElements = ['segmentsTitle', 'segmentsDescription'];
+          segmentElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            if (element && segments[elementId]) {
+              element.textContent = segments[elementId];
+            }
+          });
+        }
+
+        // Update team section
+        if (data.team) {
+          const team = data.team;
+          const teamElements = ['teamTitle', 'teamDescription'];
+          teamElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            if (element && team[elementId]) {
+              element.textContent = team[elementId];
+            }
+          });
+        }
+
+        // Update testimonials section
+        if (data.testimonials) {
+          const testimonials = data.testimonials;
+          const testimonialElements = ['testimonialsTitle', 'testimonialsDescription'];
+          testimonialElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            if (element && testimonials[elementId]) {
+              element.textContent = testimonials[elementId];
+            }
+          });
+        }
+
+        // Update contact section
+        if (data.contact) {
+          const contact = data.contact;
+          const contactTitle = document.getElementById('contactTitle');
+          const contactDescription = document.getElementById('contactDescription');
+          
+          if (contactTitle && contact.eyebrow) {
+            contactTitle.textContent = contact.eyebrow;
+          }
+          
+          if (contactDescription && contact.title) {
+            contactDescription.textContent = contact.title;
+          }
+        }
+
+        // Update gallery section
+        if (data.gallery) {
+          const gallery = data.gallery;
+          const galleryElements = ['galleryTitle', 'galleryDescription'];
+          galleryElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            if (element && gallery[elementId]) {
+              element.textContent = gallery[elementId];
+            }
+          });
+        }
+
+        // Update decoration section
+        if (data.decoration) {
+          const decoration = data.decoration;
+          const decorationElements = ['decorationTitle', 'decorationDescription'];
+          decorationElements.forEach(elementId => {
+            const element = document.getElementById(elementId);
+            if (element && decoration[elementId]) {
+              element.textContent = decoration[elementId];
+            }
+          });
         }
 
         console.log('Content loaded successfully from database');

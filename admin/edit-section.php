@@ -14,7 +14,7 @@ $conn = $db->getConnection();
 
 // Get section parameter
 $section = $_GET['section'] ?? '';
-$valid_sections = ['hero', 'about', 'segments', 'contact', 'navigation', 'footer'];
+$valid_sections = ['hero', 'about', 'segments', 'team', 'testimonials', 'contact', 'gallery', 'decoration', 'navigation', 'footer'];
 
 if (!in_array($section, $valid_sections)) {
     header('Location: dashboard.php');
@@ -26,6 +26,28 @@ if ($_POST && isset($_POST['update_content'])) {
     try {
         $content = $_POST['content'];
         $updated_by = $_SESSION['username'];
+        
+        // Handle file uploads
+        if (!empty($_FILES)) {
+            $upload_dir = '../assets/images/';
+            foreach ($_FILES as $field_name => $file) {
+                if ($file['error'] == UPLOAD_ERR_OK && $file['size'] > 0) {
+                    $file_extension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
+                    $allowed_extensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                    
+                    if (in_array($file_extension, $allowed_extensions)) {
+                        // Generate unique filename
+                        $new_filename = $section . '_' . $field_name . '_' . time() . '.' . $file_extension;
+                        $upload_path = $upload_dir . $new_filename;
+                        
+                        if (move_uploaded_file($file['tmp_name'], $upload_path)) {
+                            // Store relative path in content
+                            $content[$field_name] = 'assets/images/' . $new_filename;
+                        }
+                    }
+                }
+            }
+        }
         
         // Use SQLite compatible upsert syntax
         $query = "INSERT OR REPLACE INTO content_sections (section_name, content, updated_by, updated_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)";
@@ -58,25 +80,81 @@ $section_configs = [
         'fields' => [
             'eyebrow' => ['label' => 'Eyebrow Text', 'type' => 'text'],
             'title' => ['label' => 'Main Title', 'type' => 'textarea'],
-            'script' => ['label' => 'Script Text', 'type' => 'text'],
-            'stats' => ['label' => 'Statistics', 'type' => 'stats']
+            'script' => ['label' => 'Script Text', 'type' => 'readonly'],
+            'stats' => ['label' => 'Statistics', 'type' => 'stats'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'file']
         ]
     ],
     'about' => [
         'title' => 'About Section',
-        'description' => 'Company information and story',
+        'description' => 'Company information, story, and frame images - complete editing',
         'fields' => [
             'eyebrow' => ['label' => 'Eyebrow Text', 'type' => 'text'],
-            'title' => ['label' => 'Section Title', 'type' => 'textarea'],
-            'description' => ['label' => 'Description', 'type' => 'textarea']
+            'title' => ['label' => 'Main Title', 'type' => 'textarea'],
+            'description' => ['label' => 'Company Description', 'type' => 'textarea'],
+            'frame_portrait' => ['label' => 'Portrait Frame Image', 'type' => 'file'],
+            'frame_top' => ['label' => 'Top Frame Image', 'type' => 'file'],
+            'frame_bottom' => ['label' => 'Bottom Frame Image', 'type' => 'file']
+        ]
+    ],
+    'trusted-scene' => [
+        'title' => 'Trusted Scene',
+        'description' => 'Customer feedback and trust indicators',
+        'fields' => [
+            'badge_image' => ['label' => 'Badge Image', 'type' => 'file'],
+            'line_1' => ['label' => 'First Text Block', 'type' => 'textarea'],
+            'line_2' => ['label' => 'Brand Name Text', 'type' => 'text'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'file']
         ]
     ],
     'segments' => [
         'title' => 'Our Segments',
-        'description' => 'Service packages and offerings',
+        'description' => 'Service packages and offerings - complete text editing',
         'fields' => [
             'title' => ['label' => 'Section Title', 'type' => 'text'],
-            'items' => ['label' => 'Service Items', 'type' => 'segments']
+            'classic_title' => ['label' => 'Classic - Title', 'type' => 'text'],
+            'classic_text' => ['label' => 'Classic - Description', 'type' => 'textarea'],
+            'premium_title' => ['label' => 'Premium - Title', 'type' => 'text'],
+            'premium_text' => ['label' => 'Premium - Description', 'type' => 'textarea'],
+            'signature_title' => ['label' => 'Signature - Title', 'type' => 'text'],
+            'signature_text' => ['label' => 'Signature - Description', 'type' => 'textarea']
+        ]
+    ],
+    'team' => [
+        'title' => 'Our Team',
+        'description' => 'Team members and their roles',
+        'fields' => [
+            'title' => ['label' => 'Section Title', 'type' => 'text'],
+            'description' => ['label' => 'Section Description', 'type' => 'textarea'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'file']
+        ]
+    ],
+    'testimonials' => [
+        'title' => 'Testimonials',
+        'description' => 'Customer reviews and feedback',
+        'fields' => [
+            'title' => ['label' => 'First Word', 'type' => 'text'],
+            'description' => ['label' => 'Second Word', 'type' => 'text'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'file']
+        ]
+    ],
+    'gallery' => [
+        'title' => 'Gallery',
+        'description' => 'Photo gallery and albums',
+        'fields' => [
+            'title' => ['label' => 'First Word', 'type' => 'text'],
+            'description' => ['label' => 'Second Word', 'type' => 'text'],
+            'background_image' => ['label' => 'Background Image', 'type' => 'file'],
+            'albums' => ['label' => 'Gallery Albums', 'type' => 'gallery']
+        ]
+    ],
+    'decoration' => [
+        'title' => 'Gallery Decoration Frames',
+        'description' => 'Upload images for the three decoration frames (image-only editing)',
+        'fields' => [
+            'frame_left' => ['label' => 'Left Frame Image', 'type' => 'file'],
+            'frame_center' => ['label' => 'Center Frame Image', 'type' => 'file'],
+            'frame_right' => ['label' => 'Right Frame Image', 'type' => 'file']
         ]
     ],
     'contact' => [
@@ -331,6 +409,56 @@ $config = $section_configs[$section];
             border: 1px solid #f5c6cb;
             color: #721c24;
         }
+        
+        .file-upload-container {
+            border: 2px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f9fafb;
+        }
+        
+        .current-file {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .current-file img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .file-input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            background: white;
+        }
+        
+        .help-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #6b7280;
+        }
+        
+        .gallery-container {
+            background: #f3f4f6;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+        }
+        
+        .readonly-field {
+            background: #f8f9fa;
+            padding: 0.75rem;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            color: #6c757d;
+            font-style: italic;
+        }
     </style>
 </head>
 <body>
@@ -358,13 +486,21 @@ $config = $section_configs[$section];
         <?php endif; ?>
         
         <div class="form-container">
-            <form method="POST">
+            <form method="POST" enctype="multipart/form-data">
                 <?php foreach ($config['fields'] as $field_name => $field_config): ?>
                     <div class="form-group">
                         <label><?php echo $field_config['label']; ?></label>
                         
                         <?php if ($field_config['type'] === 'text' || $field_config['type'] === 'email'): ?>
                             <input type="<?php echo $field_config['type']; ?>" 
+                                   name="content[<?php echo $field_name; ?>]" 
+                                   value="<?php echo htmlspecialchars($current_content[$field_name] ?? ''); ?>">
+                        
+                        <?php elseif ($field_config['type'] === 'readonly'): ?>
+                            <div class="readonly-field">
+                                <?php echo htmlspecialchars($current_content[$field_name] ?? 'No content set'); ?>
+                            </div>
+                            <input type="hidden" 
                                    name="content[<?php echo $field_name; ?>]" 
                                    value="<?php echo htmlspecialchars($current_content[$field_name] ?? ''); ?>">
                         
@@ -425,6 +561,31 @@ $config = $section_configs[$section];
                                                value="<?php echo htmlspecialchars($link['href'] ?? ''); ?>">
                                     </div>
                                 <?php endforeach; ?>
+                            </div>
+                        
+                        <?php elseif ($field_config['type'] === 'file'): ?>
+                            <div class="file-upload-container">
+                                <?php if (!empty($current_content[$field_name])): ?>
+                                    <div class="current-file">
+                                        <p>Current: <strong><?php echo htmlspecialchars(basename($current_content[$field_name])); ?></strong></p>
+                                        <?php if (preg_match('/\.(jpg|jpeg|png|gif|webp)$/i', $current_content[$field_name])): ?>
+                                            <img src="../<?php echo htmlspecialchars($current_content[$field_name]); ?>" 
+                                                 alt="Current image" style="max-width: 200px; height: auto; margin: 10px 0;">
+                                        <?php endif; ?>
+                                        <input type="hidden" name="content[<?php echo $field_name; ?>]" 
+                                               value="<?php echo htmlspecialchars($current_content[$field_name] ?? ''); ?>">
+                                    </div>
+                                <?php endif; ?>
+                                <input type="file" name="<?php echo $field_name; ?>" 
+                                       accept="image/*" class="file-input">
+                                <p class="help-text">Upload a new image to replace the current one. Supported formats: JPG, PNG, GIF, WebP</p>
+                            </div>
+                        
+                        <?php elseif ($field_config['type'] === 'gallery'): ?>
+                            <div class="gallery-container">
+                                <p>Gallery management coming soon...</p>
+                                <input type="hidden" name="content[<?php echo $field_name; ?>]" 
+                                       value="<?php echo htmlspecialchars(json_encode($current_content[$field_name] ?? [])); ?>">
                             </div>
                         <?php endif; ?>
                     </div>

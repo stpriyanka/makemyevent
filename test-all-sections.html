@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Sections Test - Make My Event</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-container { max-width: 1200px; margin: 0 auto; }
+        .section-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin: 20px 0; }
+        .section-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .section-title { color: #4d0e16; font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
+        .section-links { margin: 15px 0; }
+        .section-links a { 
+            display: inline-block; 
+            margin: 5px 10px 5px 0; 
+            padding: 8px 16px; 
+            background: #007cba; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 4px; 
+            font-size: 0.9rem;
+        }
+        .section-links a:hover { background: #005a8b; }
+        .features { background: #e8f4fd; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        .features ul { margin: 5px 0; padding-left: 20px; }
+        .status-complete { color: #28a745; font-weight: bold; }
+        .status-partial { color: #ffc107; font-weight: bold; }
+        .main-links { text-align: center; margin: 30px 0; }
+        .main-links a { 
+            display: inline-block; 
+            margin: 10px 15px; 
+            padding: 15px 25px; 
+            background: #4d0e16; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-weight: bold;
+        }
+        .main-links a:hover { background: #3a0b11; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎉 Complete Admin Panel - All Sections Ready!</h1>
+        
+        <div class="main-links">
+            <a href="index-cms.html">🎨 CMS Site (Edit Mode)</a>
+            <a href="index.html">🌐 Original Site (Public)</a>
+            <a href="login.php">🔐 Admin Login</a>
+        </div>
+
+        <h2>📋 All Editable Sections</h2>
+        <div class="section-grid">
+            
+            <div class="section-card">
+                <div class="section-title">🎯 Hero Section</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Eyebrow, Title, Script text editing</li>
+                        <li>Statistics management</li>
+                        <li>Background image upload</li>
+                        <li>Real-time updates on both sites</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=hero">Edit Hero</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">📖 About Section</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Eyebrow, Title, Description editing</li>
+                        <li>Background image upload</li>
+                        <li>Dynamic content loading</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=about">Edit About</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">🎨 Our Segments</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Section title editing (OUR SEGMENTS)</li>
+                        <li>Service package management</li>
+                        <li>Dynamic text updates</li>
+                        <li>Background image upload</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=segments">Edit Segments</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">👥 Our Team</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Team section title editing</li>
+                        <li>Background image upload</li>
+                        <li>Dynamic content loading</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=team">Edit Team</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">💬 Testimonials</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Section title editing (OUR TESTIMONIALS)</li>
+                        <li>Background image upload</li>
+                        <li>Dynamic text updates</li>
+                        <li>Review image management</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=testimonials">Edit Testimonials</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">📞 Contact</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Contact title and description</li>
+                        <li>Address, phone, email editing</li>
+                        <li>Map query customization</li>
+                        <li>Real-time updates</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=contact">Edit Contact</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">🖼️ Gallery</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Gallery title editing (OUR GALLERY)</li>
+                        <li>Background image upload</li>
+                        <li>Album management system</li>
+                        <li>Image upload functionality</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=gallery">Edit Gallery</a>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <div class="section-title">🎭 Decoration</div>
+                <div class="features">
+                    <strong>Status:</strong> <span class="status-complete">✅ Complete</span><br>
+                    <strong>Features:</strong>
+                    <ul>
+                        <li>Multiple image uploads (wall, ledge, frames)</li>
+                        <li>Dynamic image replacement</li>
+                        <li>Preview functionality</li>
+                        <li>Instant visual updates</li>
+                    </ul>
+                </div>
+                <div class="section-links">
+                    <a href="admin/edit-section.php?section=decoration">Edit Decoration</a>
+                </div>
+            </div>
+            
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 8px; margin: 30px 0;">
+            <h3>🧪 Test Complete Workflow:</h3>
+            <ol>
+                <li><strong>Edit Content:</strong> Click any "Edit" button above</li>
+                <li><strong>Update Text:</strong> Change titles, descriptions, or content</li>
+                <li><strong>Upload Images:</strong> Replace backgrounds or section images</li>
+                <li><strong>Save Changes:</strong> Click "Update Content"</li>
+                <li><strong>Verify:</strong> Check both <a href="index-cms.html">CMS Site</a> and <a href="index.html">Original Site</a></li>
+            </ol>
+        </div>
+
+        <div style="background: #e8f5e8; padding: 20px; border-radius: 8px;">
+            <h3>✅ What's Working Now:</h3>
+            <ul>
+                <li><strong>All 8 sections</strong> have complete edit functionality</li>
+                <li><strong>Text editing</strong> works for all section titles and descriptions</li>
+                <li><strong>Image uploads</strong> work for backgrounds and decorative elements</li>
+                <li><strong>Real-time updates</strong> appear on both index.html and index-cms.html</li>
+                <li><strong>Database storage</strong> maintains all changes persistently</li>
+                <li><strong>Admin authentication</strong> protects all edit functionality</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

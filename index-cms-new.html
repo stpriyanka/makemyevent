@@ -11,8 +11,114 @@
   <link rel='preconnect' href='https://fonts.gstatic.com' crossorigin>
   <link href='https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Great+Vibes&family=Inter:wght@400;500;600;700&display=swap' rel='stylesheet'>
   <link rel='stylesheet' href='styles.css'/>
+  <style>
+    /* Admin CMS Styles */
+    .admin-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(77, 14, 22, 0.95);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 0.5rem 1rem;
+      z-index: 9999;
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+    }
+    
+    .admin-bar.visible {
+      display: flex;
+    }
+    
+    .admin-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .admin-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+    
+    .admin-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      text-decoration: none;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    
+    .admin-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+    
+    body.admin-logged-in {
+      padding-top: 40px;
+    }
+    
+    body.admin-logged-in .nav {
+      top: 40px;
+    }
+    
+    .edit-indicator {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(77, 14, 22, 0.9);
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      cursor: pointer;
+    }
+    
+    .editable-section:hover .edit-indicator {
+      opacity: 1;
+    }
+    
+    .editable-section {
+      position: relative;
+    }
+    
+    .admin-access-btn {
+      background: linear-gradient(135deg, #28a745 0%, #20c997 100%) !important;
+      color: white !important;
+      padding: 0.5rem 1rem !important;
+      border-radius: 20px !important;
+      font-weight: 600 !important;
+      text-decoration: none !important;
+      font-size: 0.9rem !important;
+      transition: all 0.3s ease !important;
+      box-shadow: 0 2px 10px rgba(40, 167, 69, 0.3) !important;
+    }
+    
+    .admin-access-btn:hover {
+      transform: translateY(-2px) !important;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4) !important;
+    }
+  </style>
 </head>
 <body>
+  <!-- Admin Bar (shown when logged in) -->
+  <div id="adminBar" class="admin-bar">
+    <div class="admin-info">
+      <span>🔧 CMS Mode Active</span>
+      <span id="adminUser"></span>
+    </div>
+    <div class="admin-actions">
+      <a href="admin/dashboard.php" class="admin-btn">Dashboard</a>
+      <a href="api/logout.php" class="admin-btn">Logout</a>
+    </div>
+  </div>
 
    <!-- <a href="#team">Team</a> -->
       <!-- <a href="#testimonials">Testimonials</a> -->
@@ -29,6 +135,7 @@
       <a href="#team">Team</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#contact">Contact</a>
+      <a href="#" onclick="adminAccess()" class="admin-access-btn" id="adminAccessBtn">🔧 Admin Login</a>
     </div>
   </div>
 </nav>
@@ -66,7 +173,8 @@
 
   
   
-<header id="top" class="hero hero--moulded">
+<header id="top" class="hero hero--moulded editable-section">
+  <div class="edit-indicator" onclick="editSection('hero')">✏️ Edit</div>
   <!-- Background (Image 2) -->
   <img src="assets/images/Header Bg-02 NEW-01.jpg" alt="Background with flowers" class="hero-bg">
 
@@ -242,7 +350,7 @@
 <section class="trusted-scene" aria-label="Trusted feedback showcase">
   <!-- Left column with badge -->
   <div class="left-col">
-    <img id="trusted-scene-badge" class="badge"
+    <img class="badge"
          src="assets/images/trusted%20feedback%20info%20image-03.png"
          alt="98% trusted feedback on Facebook, 146+ reviews" />
   </div>
@@ -250,12 +358,12 @@
   <!-- Right column with text -->
   <div class="right-col">
     <div class="copy-wrap" role="presentation">
-      <span id="trusted-scene-line-1" class="line-1">
+      <span class="line-1">
         We don’t want to be a one-time choice, for our clients.<br>
         Our goal is to ensure that, whenever a special moment arises in their lives,<br>
         the first name they think of is
       </span>
-      <span id="trusted-scene-line-2" class="line-2"> MAKE MY EVENT.</span>
+      <span class="line-2"> MAKE MY EVENT.</span>
     </div>
   </div>
 </section>
@@ -402,15 +510,16 @@
 
 
 
-  <section id="about" class="about-scene">
+  <section id="about" class="about-scene editable-section">
+    <div class="edit-indicator" onclick="editSection('about')">✏️ Edit</div>
   <!-- FULLSCREEN BACKGROUND (covers whole viewport width/height) -->
-  <img id="about-background" class="wall-bg" src="assets/images/about-bg new-01.jpg" alt="Red wall background">
+  <img class="wall-bg" src="assets/images/about-bg new-01.jpg" alt="Red wall background">
 
   <div class="about-stage">
     <!-- Framed Photos (same positions as your original code) -->
-    <img id="about-frame-portrait" class="frame-img frame-portrait" src="assets/images/frame-portrait.jpg" alt="Framed portrait">
-    <img id="about-frame-top" class="frame-img frame-top" src="assets/images/Framed couple top.jpg" alt="Framed couple top">
-    <img id="about-frame-bottom" class="frame-img frame-bottom" src="assets/images/frame-bottom.jpg" alt="Framed couple bottom">
+    <img class="frame-img frame-portrait" src="assets/images/frame-portrait.jpg" alt="Framed portrait">
+    <img class="frame-img frame-top"      src="assets/images/Framed couple top.jpg" alt="Framed couple top">
+    <img class="frame-img frame-bottom"   src="assets/images/frame-bottom.jpg" alt="Framed couple bottom">
 
     <!-- Text Content -->
     <div class="about-copy">
@@ -570,10 +679,6 @@
 <!-- DECORATION SECTION -->
 <section id="decoration" class="decor-scene">
   <div class="decor-stage">
-    <!-- Hidden elements for dynamic content -->
-    <div id="decorationTitle" style="display: none;"></div>
-    <div id="decorationDescription" style="display: none;"></div>
-    
     <!-- Background wall -->
     <img src="assets/images/decor-wall.jpg" alt="Red wall background" class="decor-bg" />
 
@@ -582,9 +687,9 @@
 
     <!-- Frames -->
     <div class="decor-frames">
-      <img id="frame-left" src="assets/images/frame-left.jpg"   alt="Framed photo left"   class="decor-frame" />
-      <img id="frame-center" src="assets/images/frame-center.jpg" alt="Framed photo center" class="decor-frame" />
-      <img id="frame-right" src="assets/images/frame-right.jpg"  alt="Framed photo right"  class="decor-frame" />
+      <img src="assets/images/frame-left.jpg"   alt="Framed photo left"   class="decor-frame" />
+      <img src="assets/images/frame-center.jpg" alt="Framed photo center" class="decor-frame" />
+      <img src="assets/images/frame-right.jpg"  alt="Framed photo right"  class="decor-frame" />
     </div>
   </div>
 </section>
@@ -726,8 +831,8 @@
 
     <div class="segments-container">
       <h2 class="segments-heading">
-        <span id="segmentsTitle">OUR</span>
-        <span id="segmentsDescription">SEGMENTS</span>
+        <span>OUR</span>
+        <span>SEGMENTS</span>
       </h2>
 
       <div class="segments-grid">
@@ -736,8 +841,8 @@
           <div class="segment-card-inner">
             <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
             <div class="segment-content">
-              <h3 id="segment-classic-title" class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
-              <p id="segment-classic-text" class="seg-text">
+              <h3 class="seg-title"><strong>CLASSIC</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
                 <strong>Traditional yet graceful,</strong> this package covers all the essential décor elements
                 to make your wedding simple, beautiful, and memorable without compromise.
               </p>
@@ -750,8 +855,8 @@
           <div class="segment-card-inner">
             <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
             <div class="segment-content">
-              <h3 id="segment-premium-title" class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
-              <p id="segment-premium-text" class="seg-text">
+              <h3 class="seg-title"><strong>PREMIUM</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
                 <strong>A touch of royal sophistication —</strong> designed for couples who want refined elegance,
                 stylish details, and a charming ambience that leaves a lasting impression.
               </p>
@@ -764,8 +869,8 @@
           <div class="segment-card-inner">
             <img src="assets/images/segments-arch.png" alt="" class="segment-arch" aria-hidden="true">
             <div class="segment-content">
-              <h3 id="segment-signature-title" class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
-              <p id="segment-signature-text" class="seg-text">
+              <h3 class="seg-title"><strong>SIGNATURE</strong> <small>TOUCH</small></h3>
+              <p class="seg-text">
                 <strong>The ultimate grandeur experience —</strong> a lavish, bespoke décor journey where every detail
                 is tailored to perfection, creating a truly unforgettable celebration.
               </p>
@@ -896,8 +1001,8 @@
   <div class="segments-container"><!-- reuse same container spacing -->
     <!-- Match OUR SEGMENTS heading style -->
     <h2 class="segments-heading">
-      <span id="galleryTitle">OUR</span>
-      <span id="galleryDescription">GALLERY</span>
+      <span>OUR</span>
+      <span>GALLERY</span>
     </h2>
 
     <div id="lightgallery" class="gallery-grid">
@@ -1304,10 +1409,9 @@ document.addEventListener('DOMContentLoaded', function () {
 <section id="team" class="section team-scene">
   <div class="segments-container">
       <h2 class="segments-heading">
-        <span id="teamTitle">OUR TEAM</span>
+        <span>OUR TEAM</span>
         
       </h2>
-      <p id="teamDescription" style="display: none;"></p>
 
     <div class="team-layout">
       <!-- Left: Lead portrait (large) -->
@@ -1529,8 +1633,8 @@ figcaption{ text-align:center; margin-top:10px; }
  <section id="testimonials" class="section testimonials">
   <div class="segments-container"> 
     <h2 class="segments-heading">
-      <span id="testimonialsTitle">OUR</span>
-      <span id="testimonialsDescription">TESTIMONIALS</span>
+      <span>OUR</span>
+      <span>TESTIMONIALS</span>
     </h2>
   </div>
 
@@ -1728,8 +1832,8 @@ html, body { margin: 0; }
 
     <!-- Contact Info -->
     <div class="frame contact-card">
-      <div class="eyebrow" id="contactTitle">Contact</div>
-      <h2 class="title" id="contactDescription">Let’s make your event unforgettable</h2>
+      <div class="eyebrow">Contact</div>
+      <h2 class="title">Let’s make your event unforgettable</h2>
 
       <!-- Address -->
       <div class="item">
@@ -1900,185 +2004,9 @@ footer {
         // Update about section
         if (data.about) {
           const about = data.about; // Already parsed by API
-          
-          // Update text content
           document.getElementById('aboutEyebrow').textContent = about.eyebrow || '';
           document.getElementById('aboutTitle').textContent = about.title || '';
           document.getElementById('aboutDescription').textContent = about.description || '';
-          
-          // Update frame images only (background image stays in database but not editable)
-          const framePortrait = document.getElementById('about-frame-portrait');
-          const frameTop = document.getElementById('about-frame-top');
-          const frameBottom = document.getElementById('about-frame-bottom');
-          
-          if (framePortrait && about.frame_portrait) {
-            framePortrait.src = about.frame_portrait;
-          }
-          
-          if (frameTop && about.frame_top) {
-            frameTop.src = about.frame_top;
-          }
-          
-          if (frameBottom && about.frame_bottom) {
-            frameBottom.src = about.frame_bottom;
-          }
-          
-          // Background image still syncs from database but not editable in admin
-          const aboutBackground = document.getElementById('about-background');
-          if (aboutBackground && about.background_image) {
-            aboutBackground.src = about.background_image;
-          }
-        }
-
-        // Update trusted-scene section
-        if (data['trusted-scene']) {
-          const trustedScene = data['trusted-scene'];
-          const badgeImg = document.getElementById('trusted-scene-badge');
-          const line1 = document.getElementById('trusted-scene-line-1');
-          const line2 = document.getElementById('trusted-scene-line-2');
-          
-          if (badgeImg && trustedScene.badge_image) {
-            badgeImg.src = trustedScene.badge_image;
-          }
-          
-          if (line1 && trustedScene.line_1) {
-            line1.innerHTML = trustedScene.line_1.replace(/\n/g, '<br>');
-          }
-          
-          if (line2 && trustedScene.line_2) {
-            line2.textContent = trustedScene.line_2;
-          }
-          
-          // Update background image
-          if (trustedScene.background_image) {
-            const trustedSceneElement = document.querySelector('.trusted-scene');
-            if (trustedSceneElement) {
-              trustedSceneElement.style.backgroundImage = `url("${trustedScene.background_image}")`;
-            }
-          }
-        }
-
-        // Update segments section
-        if (data.segments) {
-          const segments = data.segments;
-          const segmentsTitle = document.getElementById('segmentsTitle');
-          const segmentsDescription = document.getElementById('segmentsDescription');
-          
-          // Update main title (split into two parts)
-          if (segmentsTitle && segments.title) {
-            const titleParts = segments.title.split(' ');
-            segmentsTitle.textContent = titleParts[0] || 'OUR';
-          }
-          
-          if (segmentsDescription && segments.title) {
-            const titleParts = segments.title.split(' ');
-            segmentsDescription.textContent = titleParts.slice(1).join(' ') || 'SEGMENTS';
-          }
-          
-          // Update individual segment content
-          const classicTitle = document.getElementById('segment-classic-title');
-          const classicText = document.getElementById('segment-classic-text');
-          const premiumTitle = document.getElementById('segment-premium-title');
-          const premiumText = document.getElementById('segment-premium-text');
-          const signatureTitle = document.getElementById('segment-signature-title');
-          const signatureText = document.getElementById('segment-signature-text');
-          
-          if (classicTitle && segments.classic_title) {
-            classicTitle.innerHTML = segments.classic_title;
-          }
-          
-          if (classicText && segments.classic_text) {
-            classicText.innerHTML = segments.classic_text;
-          }
-          
-          if (premiumTitle && segments.premium_title) {
-            premiumTitle.innerHTML = segments.premium_title;
-          }
-          
-          if (premiumText && segments.premium_text) {
-            premiumText.innerHTML = segments.premium_text;
-          }
-          
-          if (signatureTitle && segments.signature_title) {
-            signatureTitle.innerHTML = segments.signature_title;
-          }
-          
-          if (signatureText && segments.signature_text) {
-            signatureText.innerHTML = segments.signature_text;
-          }
-        }
-
-        // Update team section
-        if (data.team) {
-          const team = data.team;
-          const teamElements = ['teamTitle', 'teamDescription'];
-          teamElements.forEach(elementId => {
-            const element = document.getElementById(elementId);
-            if (element && team[elementId]) {
-              element.textContent = team[elementId];
-            }
-          });
-        }
-
-        // Update testimonials section
-        if (data.testimonials) {
-          const testimonials = data.testimonials;
-          const testimonialElements = ['testimonialsTitle', 'testimonialsDescription'];
-          testimonialElements.forEach(elementId => {
-            const element = document.getElementById(elementId);
-            if (element && testimonials[elementId]) {
-              element.textContent = testimonials[elementId];
-            }
-          });
-        }
-
-        // Update contact section
-        if (data.contact) {
-          const contact = data.contact;
-          const contactTitle = document.getElementById('contactTitle');
-          const contactDescription = document.getElementById('contactDescription');
-          
-          if (contactTitle && contact.eyebrow) {
-            contactTitle.textContent = contact.eyebrow;
-          }
-          
-          if (contactDescription && contact.title) {
-            contactDescription.textContent = contact.title;
-          }
-        }
-
-        // Update gallery section
-        if (data.gallery) {
-          const gallery = data.gallery;
-          const galleryElements = ['galleryTitle', 'galleryDescription'];
-          galleryElements.forEach(elementId => {
-            const element = document.getElementById(elementId);
-            if (element && gallery[elementId]) {
-              element.textContent = gallery[elementId];
-            }
-          });
-        }
-
-        // Update decoration section (frame images only)
-        if (data.decoration) {
-          const decoration = data.decoration;
-          
-          // Update frame images
-          const frameLeft = document.getElementById('frame-left');
-          const frameCenter = document.getElementById('frame-center');
-          const frameRight = document.getElementById('frame-right');
-          
-          if (frameLeft && decoration.frame_left) {
-            frameLeft.src = decoration.frame_left;
-          }
-          
-          if (frameCenter && decoration.frame_center) {
-            frameCenter.src = decoration.frame_center;
-          }
-          
-          if (frameRight && decoration.frame_right) {
-            frameRight.src = decoration.frame_right;
-          }
         }
 
         console.log('Content loaded successfully from database');
@@ -2091,7 +2019,58 @@ footer {
     // Load content when page loads
     document.addEventListener('DOMContentLoaded', function() {
       loadContent();
+      checkAdminSession(); // Add admin session check
     });
+    
+    // CMS Admin Functionality
+    let isAdminLoggedIn = false;
+    let currentUser = '';
+
+    // Check admin session
+    async function checkAdminSession() {
+      try {
+        const response = await fetch('api/check-session.php');
+        const data = await response.json();
+        
+        if (data.logged_in) {
+          isAdminLoggedIn = true;
+          document.body.classList.add('admin-logged-in');
+          document.getElementById('adminBar').classList.add('visible');
+          document.getElementById('adminUser').textContent = `${data.name} (${data.role})`;
+          
+          // Update admin access button
+          const adminAccessBtn = document.getElementById('adminAccessBtn');
+          if (adminAccessBtn) adminAccessBtn.innerHTML = '🏠 Dashboard';
+        } else {
+          // Update admin access button for logged out state
+          const adminAccessBtn = document.getElementById('adminAccessBtn');
+          if (adminAccessBtn) adminAccessBtn.innerHTML = '🔧 Admin Login';
+        }
+      } catch (error) {
+        console.log('Not logged in as admin');
+        // Update admin access button for error state  
+        const adminAccessBtn = document.getElementById('adminAccessBtn');
+        if (adminAccessBtn) adminAccessBtn.innerHTML = '🔧 Admin Login';
+      }
+    }
+
+    // Edit section function
+    function editSection(section) {
+      if (isAdminLoggedIn) {
+        window.location.href = `admin/edit-section.php?section=${section}`;
+      } else {
+        window.location.href = 'login.php';
+      }
+    }
+    
+    // Admin access function
+    function adminAccess() {
+      if (isAdminLoggedIn) {
+        window.location.href = 'admin/dashboard.php';
+      } else {
+        window.location.href = 'login.php';
+      }
+    }
   </script>
 
 </body></html>
